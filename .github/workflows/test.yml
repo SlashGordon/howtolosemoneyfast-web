@@ -1,0 +1,53 @@
+name: 🧪 Run Tests
+
+on:
+  push:
+    branches-ignore: [ main ]  # ⛔ Skip pushes to main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: 🧪 Test Job
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # ✅ Use LTS version for stability
+          cache: 'npm'
+          
+      - name: 🧹 Clean npm cache
+        run: npm cache clean --force
+
+      - name: Remove node_modules and package-lock.json
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+
+      - name: 📦 Install Dependencies
+        run: |
+          npm install --legacy-peer-deps
+          npm ls --depth=0
+
+      - name: 🔍 TypeScript Check (Skipped)
+        run: echo "Skipping type check temporarily"
+
+      - name: 🧪 Run Tests
+        run: npm test
+
+      - name: 📤 Upload Test Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 5
+
+      - name: 🐛 Show npm logs on failure
+        if: failure()
+        run: cat ~/.npm/_logs/* || true

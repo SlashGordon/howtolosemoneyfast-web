@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad - Cómo perder dinero rápidamente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-[Poppins]">
+  <!-- Language Selector -->
+  <div class="fixed top-4 right-4 z-50 p-2 bg-gray-800 rounded shadow-lg">
+    <label for="language-selector" class="text-white text-sm mr-2">Idioma:</label>
+    <select id="language-selector" class="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1 text-sm" 
+            aria-label="Seleccionar idioma" title="Seleccionar idioma">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="es" selected>Español</option>
+    </select>
+  </div>
+  
+  <!-- Inline script to ensure language selector works -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const selector = document.getElementById('language-selector');
+      if (selector) {
+        const currentLang = localStorage.getItem('language') || 'en';
+        selector.value = currentLang;
+        
+        selector.addEventListener('change', function(e) {
+          const lang = e.target.value;
+          localStorage.setItem('language', lang);
+          if (lang === 'de') {
+            window.location.href = 'privacy-de.html';
+          } else if (lang === 'es') {
+            window.location.href = 'privacy-es.html';
+          } else {
+            window.location.href = 'privacy.html';
+          }
+        });
+      }
+    });
+  </script>
+
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="index.html" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Volver a la página principal</a>
+      <h1 class="text-4xl font-bold mb-4">Política de Privacidad</h1>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <div>
+        <h2 class="text-2xl font-bold mb-4">1. Protección de Datos de un Vistazo</h2>
+        <h3 class="text-xl font-bold mb-2">Información General</h3>
+        <p class="mb-4">
+          La siguiente información proporciona una visión general simple de lo que sucede con sus datos personales cuando visita este sitio web.
+          Los datos personales son todos aquellos datos que pueden utilizarse para identificarle personalmente. Para obtener información detallada
+          sobre la protección de datos, consulte nuestra política de privacidad que se detalla a continuación.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Recopilación de Datos en Este Sitio Web</h3>
+        <p class="mb-4">
+          <strong>¿Quién es responsable de la recopilación de datos en este sitio web?</strong><br>
+          El procesamiento de datos en este sitio web es realizado por el operador del sitio web. Puede encontrar los detalles de contacto
+          en el Aviso Legal de este sitio web.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">¿Cómo Recopilamos Sus Datos?</h3>
+        <p class="mb-4">
+          Sus datos se recopilan cuando usted nos los proporciona. Estos pueden ser datos que introduce en un formulario de contacto
+          o a través de sus preferencias guardadas.
+          Otros datos se recopilan automáticamente por nuestros sistemas de TI cuando visita el sitio web. Estos son principalmente
+          datos técnicos (por ejemplo, navegador de Internet, sistema operativo o hora de visualización de la página). Estos datos
+          se recopilan automáticamente tan pronto como ingresa a nuestro sitio web.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">¿Para Qué Utilizamos Sus Datos?</h3>
+        <p class="mb-4">
+          Parte de los datos se recopilan para garantizar la provisión sin errores del sitio web. Otros datos pueden utilizarse
+          para analizar su comportamiento como usuario.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">¿Qué Derechos Tiene Respecto a Sus Datos?</h3>
+        <p class="mb-4">
+          Tiene derecho a recibir información gratuita sobre el origen, destinatario y propósito de sus datos personales almacenados
+          en cualquier momento. También tiene derecho a solicitar la corrección, bloqueo o eliminación de estos datos. Puede contactarnos
+          en cualquier momento en la dirección proporcionada en el Aviso Legal si tiene más preguntas sobre la protección de datos.
+          También tiene derecho a presentar una queja ante la autoridad supervisora competente.
+        </p>
+        
+        <h2 class="text-2xl font-bold mb-4 mt-8">2. Información General y Obligatoria</h2>
+        <h3 class="text-xl font-bold mb-2">Protección de Datos</h3>
+        <p class="mb-4">
+          Los operadores de estas páginas toman muy en serio la protección de sus datos personales. Tratamos sus datos personales
+          de manera confidencial y de acuerdo con las regulaciones legales de protección de datos y esta política de privacidad.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Información Sobre el Responsable</h3>
+        <p class="mb-4">
+          El responsable del procesamiento de datos en este sitio web es:<br>
+          [Su nombre]<br>
+          [Dirección]<br>
+          [Código postal, Ciudad]<br>
+          [País]<br>
+          <br>
+          Correo electrónico: [Su dirección de correo electrónico]<br>
+          Teléfono: [Su número de teléfono]
+        </p>
+        
+        <h2 class="text-2xl font-bold mb-4 mt-8">3. Recopilación de Datos en Nuestro Sitio Web</h2>
+        <h3 class="text-xl font-bold mb-2">Cookies</h3>
+        <p class="mb-4">
+          Este sitio web utiliza cookies para almacenar sus preferencias y configuraciones. Estas son pequeños archivos de texto
+          que se almacenan en su computadora. Estas cookies no dañan su computadora y no contienen virus. Las cookies sirven para
+          hacer nuestra oferta más fácil de usar, más efectiva y más segura.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Almacenamiento Local</h3>
+        <p class="mb-4">
+          Este sitio web utiliza almacenamiento local para guardar sus números de EuroJackpot y preferencias. Estos datos se almacenan
+          localmente en su dispositivo y no se transmiten a nuestros servidores.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">GitHub Pages</h3>
+        <p class="mb-4">
+          Este sitio web está alojado en GitHub Pages, un servicio proporcionado por GitHub, Inc. GitHub Pages puede recopilar información 
+          del usuario, incluidas direcciones IP, para cumplir con obligaciones legales, mantener la seguridad e integridad del sitio web y 
+          monitorear patrones de uso. Para obtener más información sobre cómo GitHub maneja sus datos, consulte la 
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" class="text-blue-400 hover:text-blue-300" 
+          target="_blank" rel="noopener noreferrer">Declaración de Privacidad de GitHub</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+  
+  <footer class="bg-gray-800 py-6 mt-12">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+      <p class="mb-2">© 2023 Cómo perder dinero rápidamente</p>
+      <div>
+        <a href="impressum-es.html" class="text-blue-400 hover:text-blue-300 mx-2">Aviso Legal</a>
+        <a href="privacy-es.html" class="text-blue-400 hover:text-blue-300 mx-2">Política de Privacidad</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

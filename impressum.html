@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum - How To Lose Money Fast</title>
+  <meta name="description" content="Legal information about the website owner of How To Lose Money Fast, a financial education website about lottery games.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://howtolosemoneyfast.com/impressum.html">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-[Poppins]">
+  <!-- Language Selector -->
+  <div class="fixed top-4 right-4 z-50 p-2 bg-gray-800 rounded shadow-lg">
+    <label for="language-selector" class="text-white text-sm mr-2">Language:</label>
+    <select id="language-selector" class="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1 text-sm" 
+            aria-label="Select language" title="Select language">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+  
+  <!-- Inline script to ensure language selector works -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const selector = document.getElementById('language-selector');
+      if (selector) {
+        const currentLang = localStorage.getItem('language') || 'en';
+        selector.value = currentLang;
+        
+        selector.addEventListener('change', function(e) {
+          const lang = e.target.value;
+          localStorage.setItem('language', lang);
+          if (lang === 'de') {
+            window.location.href = 'impressum-de.html';
+          } else if (lang === 'es') {
+            window.location.href = 'impressum-es.html';
+          } else {
+            window.location.href = 'impressum.html';
+          }
+        });
+      }
+    });
+  </script>
+
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="index.html" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Home</a>
+      <h1 class="text-4xl font-bold mb-4" data-i18n="impressum.title">Impressum</h1>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <div data-i18n="impressum.content">
+        <h2 class="text-2xl font-bold mb-4">Information according to § 5 TMG</h2>
+        <p class="mb-4">
+          [Your Name]<br>
+          [Street Address]<br>
+          [Postal Code, City]<br>
+          [Country]
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Contact</h3>
+        <p class="mb-4">
+          Phone: [Your Phone Number]<br>
+          Email: [Your Email Address]
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Responsible for content according to § 55 Abs. 2 RStV</h3>
+        <p class="mb-4">
+          [Your Name]<br>
+          [Street Address]<br>
+          [Postal Code, City]<br>
+          [Country]
+        </p>
+      </div>
+    </section>
+  </div>
+  
+  <footer class="bg-gray-800 py-6 mt-12">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+      <p class="mb-2">© 2023 How To Lose Money Fast</p>
+      <div>
+        <a href="impressum.html" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.impressum">Impressum</a>
+        <a href="privacy.html" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+  
+  <script type="module" src="./src/i18n/i18n.js"></script>
+</body>
+</html>

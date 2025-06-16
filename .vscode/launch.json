@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug TypeScript in Chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/src/*"
+      }
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Debug TypeScript in Firefox",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "url": "webpack:///src",
+          "path": "${webRoot}/src"
+        }
+      ]
+    }
+  ]
+}

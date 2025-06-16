@@ -1,0 +1,80 @@
+// Cookie consent management
+function setCookie(name, value, days) {
+  let expires = '';
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = '; expires=' + date.toUTCString();
+  }
+  document.cookie = name + '=' + (value || '') + expires + '; path=/; SameSite=Lax';
+}
+
+function getCookie(name) {
+  const nameEQ = name + '=';
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+function loadGoogleAnalytics() {
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'; // Replace with your GA ID
+  document.head.appendChild(script);
+  
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA ID
+}
+
+function loadGoogleFonts() {
+  const link = document.createElement('link');
+  link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap';
+  link.rel = 'stylesheet';
+  document.head.appendChild(link);
+}
+
+function initConsent() {
+  const consentBanner = document.getElementById('consent-banner');
+  const acceptAllBtn = document.getElementById('accept-all');
+  const acceptNecessaryBtn = document.getElementById('accept-necessary');
+  const analyticsConsent = getCookie('analytics-consent');
+  const fontsConsent = getCookie('fonts-consent');
+  
+  // Show banner if no consent has been given yet
+  if (analyticsConsent === null || fontsConsent === null) {
+    consentBanner.classList.remove('hidden');
+  }
+  
+  // Load services based on existing consent
+  if (analyticsConsent === 'true') {
+    loadGoogleAnalytics();
+  }
+  
+  if (fontsConsent === 'true') {
+    loadGoogleFonts();
+  }
+  
+  // Event listeners for consent buttons
+  acceptAllBtn.addEventListener('click', function() {
+    setCookie('analytics-consent', 'true', 365);
+    setCookie('fonts-consent', 'true', 365);
+    loadGoogleAnalytics();
+    loadGoogleFonts();
+    consentBanner.classList.add('hidden');
+  });
+  
+  acceptNecessaryBtn.addEventListener('click', function() {
+    setCookie('analytics-consent', 'false', 365);
+    setCookie('fonts-consent', 'false', 365);
+    consentBanner.classList.add('hidden');
+  });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initConsent);

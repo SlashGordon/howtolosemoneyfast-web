@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutzerklärung - Wie man schnell Geld verliert</title>
+  <!-- Google Fonts will be loaded via consent script -->
+  <link rel="stylesheet" href="./src/styles.css">
+  <script src="./src/js/consent.js" type="module"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-[Poppins]">
+  <!-- Cookie Consent Banner -->
+  <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 z-50 border-t border-gray-700 hidden">
+    <div class="container mx-auto max-w-4xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="font-bold text-lg mb-2">Ihre Datenschutzeinstellungen</h3>
+          <p class="text-sm text-gray-300">
+            Diese Website verwendet Cookies und externe Dienste, um Ihr Nutzererlebnis zu verbessern. 
+            Wir verwenden Google Analytics für Statistiken und Google Fonts für die Darstellung. 
+            Sie können wählen, ob Sie diese Dienste aktivieren möchten.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button id="accept-necessary" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">Nur notwendige</button>
+          <button id="accept-all" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm">Alle akzeptieren</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Selector -->
+  <div class="fixed top-4 right-4 z-40 p-2 bg-gray-800 rounded shadow-lg">
+    <label for="language-selector" class="text-white text-sm mr-2">Sprache:</label>
+    <select id="language-selector" class="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1 text-sm" 
+            aria-label="Sprache auswählen" title="Sprache auswählen">
+      <option value="en">English</option>
+      <option value="de" selected>Deutsch</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+  
+  <!-- Inline script to ensure language selector works -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const selector = document.getElementById('language-selector');
+      if (selector) {
+        const currentLang = localStorage.getItem('language') || 'en';
+        selector.value = currentLang;
+        
+        selector.addEventListener('change', function(e) {
+          const lang = e.target.value;
+          localStorage.setItem('language', lang);
+          if (lang === 'de') {
+            window.location.href = 'privacy-de.html';
+          } else if (lang === 'es') {
+            window.location.href = 'privacy-es.html';
+          } else {
+            window.location.href = 'privacy.html';
+          }
+        });
+      }
+    });
+  </script>
+
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="index.html" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Zurück zur Startseite</a>
+      <h1 class="text-4xl font-bold mb-4">Datenschutzerklärung</h1>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <div>
+        <h2 class="text-2xl font-bold mb-4">1. Datenschutz auf einen Blick</h2>
+        <h3 class="text-xl font-bold mb-2">Allgemeine Hinweise</h3>
+        <p class="mb-4">
+          Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, 
+          wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert 
+          werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text 
+          aufgeführten Datenschutzerklärung.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Datenerfassung auf dieser Website</h3>
+        <p class="mb-4">
+          <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
+          Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem 
+          Impressum dieser Website entnehmen.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Wie erfassen wir Ihre Daten?</h3>
+        <p class="mb-4">
+          Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, 
+          die Sie in ein Kontaktformular eingeben oder durch Ihre gespeicherten Präferenzen.
+          Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische 
+          Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt 
+          automatisch, sobald Sie diese Website betreten.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Wofür nutzen wir Ihre Daten?</h3>
+        <p class="mb-4">
+          Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können 
+          zur Analyse Ihres Nutzerverhaltens verwendet werden.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Welche Rechte haben Sie bezüglich Ihrer Daten?</h3>
+        <p class="mb-4">
+          Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten 
+          personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser 
+          Daten zu verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im 
+          Impressum angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen 
+          Aufsichtsbehörde zu.
+        </p>
+        
+        <h2 class="text-2xl font-bold mb-4 mt-8">2. Allgemeine Hinweise und Pflichtinformationen</h2>
+        <h3 class="text-xl font-bold mb-2">Datenschutz</h3>
+        <p class="mb-4">
+          Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen 
+          Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Hinweis zur verantwortlichen Stelle</h3>
+        <p class="mb-4">
+          Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br>
+          [Ihr Name]<br>
+          [Straße und Hausnummer]<br>
+          [Postleitzahl, Stadt]<br>
+          [Land]<br>
+          <br>
+          E-Mail: [Ihre E-Mail-Adresse]<br>
+          Telefon: [Ihre Telefonnummer]
+        </p>
+        
+        <h2 class="text-2xl font-bold mb-4 mt-8">3. Datenerfassung auf unserer Website</h2>
+        <h3 class="text-xl font-bold mb-2">Cookies</h3>
+        <p class="mb-4">
+          Diese Website verwendet Cookies, um Ihre Präferenzen und Einstellungen zu speichern. Dabei handelt es sich um kleine 
+          Textdateien, die auf Ihrem Computer gespeichert werden. Diese Cookies schaden Ihrem Computer nicht und enthalten keine 
+          Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Local Storage</h3>
+        <p class="mb-4">
+          Diese Website verwendet Local Storage, um Ihre EuroJackpot-Zahlen und Präferenzen zu speichern. Diese Daten werden 
+          lokal auf Ihrem Gerät gespeichert und nicht an unsere Server übermittelt.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Google Analytics</h3>
+        <p class="mb-4">
+          Diese Website nutzt den Dienst Google Analytics, der von Google LLC ("Google") angeboten wird. Google Analytics verwendet 
+          Cookies, die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch das Cookie erzeugten Informationen 
+          über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.
+          <br><br>
+          Wir haben die IP-Anonymisierung aktiviert. Dadurch wird Ihre IP-Adresse von Google innerhalb von Mitgliedstaaten der 
+          Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum vor der Übermittlung 
+          in die USA gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in den USA übertragen und 
+          dort gekürzt.
+          <br><br>
+          Google wird diese Informationen benutzen, um Ihre Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten 
+          für die Websitebetreiber zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene 
+          Dienstleistungen zu erbringen. Google kann diese Informationen auch an Dritte übertragen, sofern dies gesetzlich 
+          vorgeschrieben oder soweit Dritte diese Daten im Auftrag von Google verarbeiten.
+          <br><br>
+          Sie können die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten an Google sowie 
+          die Verarbeitung dieser Daten durch Google verhindern, indem Sie das Cookie-Banner auf unserer Website verwenden und die 
+          entsprechenden Einstellungen vornehmen.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Google Fonts</h3>
+        <p class="mb-4">
+          Diese Website nutzt zur einheitlichen Darstellung von Schriftarten externe Fonts von Google. Wenn Sie eine Seite besuchen, 
+          lädt Ihr Browser die benötigten Fonts in ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen.
+          <br><br>
+          Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt 
+          Google Kenntnis darüber, dass über Ihre IP-Adresse diese Website aufgerufen wurde. Die Nutzung von Google Fonts erfolgt 
+          im Interesse einer einheitlichen und ansprechenden Darstellung unserer Online-Angebote.
+          <br><br>
+          Sie können die Verwendung von Google Fonts verhindern, indem Sie in Ihrem Browser die Ausführung von Skripten deaktivieren 
+          oder das Cookie-Banner auf unserer Website verwenden und die entsprechenden Einstellungen vornehmen.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">GitHub Pages</h3>
+        <p class="mb-4">
+          Diese Website wird auf GitHub Pages gehostet, einem Dienst von GitHub, Inc. GitHub Pages kann Benutzerinformationen, einschließlich 
+          IP-Adressen, sammeln, um rechtlichen Verpflichtungen nachzukommen, die Sicherheit und Integrität der Website zu gewährleisten und 
+          Nutzungsmuster zu überwachen. Weitere Informationen darüber, wie GitHub mit Ihren Daten umgeht, finden Sie in der 
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" class="text-blue-400 hover:text-blue-300" 
+          target="_blank" rel="noopener noreferrer">GitHub Datenschutzerklärung</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+  
+  <footer class="bg-gray-800 py-6 mt-12">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+      <p class="mb-2">© 2023 Wie man schnell Geld verliert</p>
+      <div>
+        <a href="impressum-de.html" class="text-blue-400 hover:text-blue-300 mx-2">Impressum</a>
+        <a href="privacy-de.html" class="text-blue-400 hover:text-blue-300 mx-2">Datenschutzerklärung</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How To Lose Money Fast | Learn About Financial Mistakes</title>
+  <meta name="description" content="Discover how lottery games like EuroJackpot can waste your money. Track your spending and learn about smarter financial decisions.">
+  <meta name="keywords" content="money wasting, lottery, EuroJackpot, financial education, money management">
+  <meta property="og:title" content="How To Lose Money Fast | Learn About Financial Mistakes">
+  <meta property="og:description" content="Discover how lottery games like EuroJackpot can waste your money. Track your spending and learn about smarter financial decisions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://howtolosemoneyfast.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How To Lose Money Fast | Learn About Financial Mistakes">
+  <meta name="twitter:description" content="Discover how lottery games like EuroJackpot can waste your money. Track your spending and learn about smarter financial decisions.">
+  <link rel="canonical" href="https://howtolosemoneyfast.com">
+  <!-- Google Fonts will be loaded via consent script -->
+  <script src="./src/js/consent.js" type="module"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-[Poppins]">
+  <!-- Cookie Consent Banner -->
+  <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 z-50 border-t border-gray-700 hidden">
+    <div class="container mx-auto max-w-4xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="font-bold text-lg mb-2" data-i18n="consent.title">Your Privacy Settings</h3>
+          <p class="text-sm text-gray-300" data-i18n="consent.description">
+            This website uses cookies and external services to enhance your experience.
+            We use Google Analytics for statistics and Google Fonts for display.
+            You can choose whether you want to enable these services.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button id="accept-necessary" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm" data-i18n="consent.necessary">Necessary only</button>
+          <button id="accept-all" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm" data-i18n="consent.acceptAll">Accept all</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Selector -->
+  <div class="fixed top-4 right-4 z-40 p-2 bg-gray-800 rounded shadow-lg">
+    <label for="language-selector" class="text-white text-sm mr-2">Language:</label>
+    <select id="language-selector" class="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1 text-sm" 
+            aria-label="Select language" title="Select language">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+  
+  <!-- Inline script to ensure language selector works -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const selector = document.getElementById('language-selector');
+      if (selector) {
+        const currentLang = localStorage.getItem('language') || 'en';
+        selector.value = currentLang;
+        
+        selector.addEventListener('change', function(e) {
+          const lang = e.target.value;
+          localStorage.setItem('language', lang);
+          window.location.reload();
+        });
+      }
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <header class="text-center mb-16">
+        <div class="inline-block animate-bounce mb-4">
+          <span class="text-3xl">💸</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-red-500" data-i18n="title">
+          How To Lose Money Fast
+        </h1>
+      </header>
+      <!-- EuroJackpot Section -->
+      <section id="eurojackpot-container" class="mb-16">
+        <!-- EuroJackpot component will be rendered here -->
+      </section>
+      
+      <!-- Money Wasted Graph Section -->
+      <section id="money-wasted-container" class="mb-16 bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+        <h2 class="text-2xl font-bold mb-4 text-red-300" data-i18n="moneyWasted.title">Money Wasted Tracker</h2>
+        <p class="text-gray-300 mb-6" data-i18n="moneyWasted.description">See how much money you've wasted on EuroJackpot tickets over time.</p>
+        <div class="h-80 w-full">
+          <canvas id="money-wasted-chart"></canvas>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <footer class="bg-gray-800 py-6">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+      <p class="mb-2">© 2023 How To Lose Money Fast</p>
+      <div class="mb-4">
+        <a href="impressum.html" id="impressum-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.impressum">Impressum</a>
+        <a href="privacy.html" id="privacy-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.privacy">Privacy Policy</a>
+      </div>
+      <div class="text-sm text-gray-500">
+        <p>This website is for educational purposes only. Learn about the financial impact of lottery games.</p>
+        <p class="mt-2">Keywords: lottery analysis, money management, financial education, EuroJackpot statistics</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set correct links based on language
+      const updateLinks = function() {
+        const lang = localStorage.getItem('language') || 'en';
+        const impressumLink = document.getElementById('impressum-link');
+        const privacyLink = document.getElementById('privacy-link');
+        
+        if (impressumLink) {
+          if (lang === 'de') {
+            impressumLink.href = 'impressum-de.html';
+          } else if (lang === 'es') {
+            impressumLink.href = 'impressum-es.html';
+          } else {
+            impressumLink.href = 'impressum.html';
+          }
+        }
+        
+        if (privacyLink) {
+          if (lang === 'de') {
+            privacyLink.href = 'privacy-de.html';
+          } else if (lang === 'es') {
+            privacyLink.href = 'privacy-es.html';
+          } else {
+            privacyLink.href = 'privacy.html';
+          }
+        }
+      };
+      
+      // Update links on page load
+      updateLinks();
+      
+      // Update links when language changes
+      const selector = document.getElementById('language-selector');
+      if (selector) {
+        selector.addEventListener('change', updateLinks);
+      }
+    });
+  </script>
+  
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

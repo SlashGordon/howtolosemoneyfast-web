@@ -7,7 +7,7 @@
 
 This satirical educational website demonstrates the financial impact of lottery games like EuroJackpot. It helps users visualize how much money they're likely to lose over time compared to smarter investment options.
 
-**Live Demo:** [[https://howtolosemoneyfast.github.io](https://slashgordon.github.io/howtolosemoneyfast_web/)
+**Live Demo:** [https://howtolosemoneyfast.github.io](https://slashgordon.github.io/howtolosemoneyfast_web/)
 
 ## ✨ Key Features
 

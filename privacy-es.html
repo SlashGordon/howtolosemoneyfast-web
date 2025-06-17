@@ -98,13 +98,13 @@
         <h3 class="text-xl font-bold mb-2">Información Sobre el Responsable</h3>
         <p class="mb-4">
           El responsable del procesamiento de datos en este sitio web es:<br>
-          [Su nombre]<br>
-          [Dirección]<br>
-          [Código postal, Ciudad]<br>
-          [País]<br>
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          Alemania<br>
           <br>
-          Correo electrónico: [Su dirección de correo electrónico]<br>
-          Teléfono: [Su número de teléfono]
+          Correo electrónico: <span id="email"></span><br>
+          Teléfono: <span id="phone"></span>
         </p>
         
         <h2 class="text-2xl font-bold mb-4 mt-8">3. Recopilación de Datos en Nuestro Sitio Web</h2>
@@ -119,6 +119,26 @@
         <p class="mb-4">
           Este sitio web utiliza almacenamiento local para guardar sus números de EuroJackpot y preferencias. Estos datos se almacenan
           localmente en su dispositivo y no se transmiten a nuestros servidores.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Google Analytics</h3>
+        <p class="mb-4">
+          Este sitio web utiliza Google Analytics, un servicio de análisis web proporcionado por Google LLC ("Google"). Google Analytics utiliza cookies para ayudar a analizar cómo los usuarios utilizan el sitio. La información generada por la cookie sobre su uso del sitio web generalmente se transmite y almacena en servidores de Google en Estados Unidos.
+          <br><br>
+          Hemos activado la anonimización de IP. Esto significa que su dirección IP será acortada por Google dentro de los estados miembros de la Unión Europea o en otros estados contratantes del Acuerdo sobre el Espacio Económico Europeo antes de ser transmitida a Estados Unidos. Solo en casos excepcionales, la dirección IP completa se transmitirá a un servidor de Google en Estados Unidos y se acortará allí.
+          <br><br>
+          Google utilizará esta información para evaluar su uso del sitio web, compilar informes sobre la actividad del sitio web para los operadores del sitio web y proporcionar otros servicios relacionados con la actividad del sitio web y el uso de Internet. Google también puede transferir esta información a terceros cuando así lo requiera la ley, o cuando dichos terceros procesen la información en nombre de Google.
+          <br><br>
+          Puede evitar la recopilación de datos generados por la cookie y relacionados con su uso del sitio web (incluida su dirección IP) y el procesamiento de estos datos por parte de Google utilizando el banner de cookies en nuestro sitio web y ajustando la configuración en consecuencia.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Google Fonts</h3>
+        <p class="mb-4">
+          Este sitio web utiliza fuentes externas de Google para la visualización uniforme de tipos de letra. Cuando visita una página, su navegador carga las fuentes necesarias en la caché de su navegador para mostrar correctamente textos y tipos de letra.
+          <br><br>
+          Para este propósito, el navegador que utiliza debe conectarse a los servidores de Google. Como resultado, Google toma conocimiento de que su dirección IP se utilizó para acceder a nuestro sitio web. El uso de Google Fonts es en interés de una presentación uniforme y atractiva de nuestras ofertas en línea.
+          <br><br>
+          Puede evitar el uso de Google Fonts desactivando la ejecución de scripts en su navegador o utilizando el banner de cookies en nuestro sitio web y ajustando la configuración en consecuencia.
         </p>
         
         <h3 class="text-xl font-bold mb-2">GitHub Pages</h3>
@@ -142,5 +162,10 @@
       </div>
     </div>
   </footer>
+  
+  <script type="module">
+    import { initContactInfo } from './src/utils/contactEncryption.js';
+    document.addEventListener('DOMContentLoaded', initContactInfo);
+  </script>
 </body>
 </html>

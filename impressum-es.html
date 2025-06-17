@@ -52,24 +52,24 @@
       <div>
         <h2 class="text-2xl font-bold mb-4">Información según § 5 TMG</h2>
         <p class="mb-4">
-          [Su nombre]<br>
-          [Dirección]<br>
-          [Código postal, Ciudad]<br>
-          [País]
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          Alemania
         </p>
         
         <h3 class="text-xl font-bold mb-2">Contacto</h3>
         <p class="mb-4">
-          Teléfono: [Su número de teléfono]<br>
-          Correo electrónico: [Su dirección de correo electrónico]
+          Teléfono: <span id="phone"></span><br>
+          Correo electrónico: <span id="email"></span>
         </p>
         
         <h3 class="text-xl font-bold mb-2">Responsable del contenido según § 55 Abs. 2 RStV</h3>
         <p class="mb-4">
-          [Su nombre]<br>
-          [Dirección]<br>
-          [Código postal, Ciudad]<br>
-          [País]
+          <span id="name1_2"></span><br>
+          <span id="address1_2"></span><br>
+          <span id="address2_2"></span><br>
+          Alemania
         </p>
       </div>
     </section>
@@ -84,5 +84,10 @@
       </div>
     </div>
   </footer>
+  
+  <script type="module">
+    import { initContactInfo } from './src/utils/contactEncryption.js';
+    document.addEventListener('DOMContentLoaded', initContactInfo);
+  </script>
 </body>
 </html>

@@ -97,13 +97,13 @@
         <h3 class="text-xl font-bold mb-2">Information About the Responsible Party</h3>
         <p class="mb-4">
           The responsible party for data processing on this website is:<br>
-          [Your Name]<br>
-          [Street Address]<br>
-          [Postal Code, City]<br>
-          [Country]<br>
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          Germany<br>
           <br>
-          Email: [Your Email Address]<br>
-          Phone: [Your Phone Number]
+          Email: <span id="email"></span><br>
+          Phone: <span id="phone"></span>
         </p>
         
         <h2 class="text-2xl font-bold mb-4 mt-8">3. Data Collection on Our Website</h2>
@@ -171,5 +171,9 @@
   </footer>
   
   <script type="module" src="./src/i18n/i18n.js"></script>
+  <script type="module">
+    import { initContactInfo } from './src/utils/contactEncryption.js';
+    document.addEventListener('DOMContentLoaded', initContactInfo);
+  </script>
 </body>
 </html>

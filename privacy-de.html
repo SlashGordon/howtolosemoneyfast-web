@@ -121,13 +121,13 @@
         <h3 class="text-xl font-bold mb-2">Hinweis zur verantwortlichen Stelle</h3>
         <p class="mb-4">
           Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br>
-          [Ihr Name]<br>
-          [Straße und Hausnummer]<br>
-          [Postleitzahl, Stadt]<br>
-          [Land]<br>
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          Deutschland<br>
           <br>
-          E-Mail: [Ihre E-Mail-Adresse]<br>
-          Telefon: [Ihre Telefonnummer]
+          E-Mail: <span id="email"></span><br>
+          Telefon: <span id="phone"></span>
         </p>
         
         <h2 class="text-2xl font-bold mb-4 mt-8">3. Datenerfassung auf unserer Website</h2>
@@ -199,5 +199,10 @@
       </div>
     </div>
   </footer>
+  
+  <script type="module">
+    import { initContactInfo } from './src/utils/contactEncryption.js';
+    document.addEventListener('DOMContentLoaded', initContactInfo);
+  </script>
 </body>
 </html>

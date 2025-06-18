@@ -1,0 +1,413 @@
+import Chart from 'chart.js/auto';
+import type { EurojackpotNumbers } from '../types/eurojackpot';
+
+interface Translations {
+  frequency: string;
+  number: string;
+  mainNumbersSum: string;
+  euroNumbersSum: string;
+  copiedSuccess: string;
+  copyError: string;
+}
+
+interface NumberFrequency {
+  [key: number]: number;
+}
+
+interface NumberWithFrequency {
+  number: number;
+  frequency: number;
+}
+
+export function initializeHistoryPage(
+  translations: Translations,
+  downloadFilename: string,
+  historicalDraws: EurojackpotNumbers[]
+): void {
+  setupDownloadButton(downloadFilename, historicalDraws);
+  setupCopyButton(translations, historicalDraws);
+
+  // Initialize charts and statistics
+  initializeCharts(translations, historicalDraws);
+  displayHotColdNumbers(historicalDraws);
+}
+
+
+function setupDownloadButton(
+  downloadFilename: string,
+  historicalDraws: EurojackpotNumbers[]
+): void {
+  const downloadBtn = document.getElementById('download-json');
+  
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      // Create a JSON blob and download it
+      const jsonData = JSON.stringify(historicalDraws, null, 2);
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = downloadFilename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }
+}
+
+function setupCopyButton(
+  translations: Translations,
+  historicalDraws: EurojackpotNumbers[]
+): void {
+  const copyBtn = document.getElementById('copy-json');
+  
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      // Copy JSON data to clipboard
+      const jsonData = JSON.stringify(historicalDraws, null, 2);
+      try {
+        await navigator.clipboard.writeText(jsonData);
+        alert(translations.copiedSuccess);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+        alert(translations.copyError);
+      }
+    });
+  }
+}
+
+function initializeCharts(
+  translations: Translations,
+  historicalDraws: EurojackpotNumbers[]
+): void {
+  // Calculate frequency of main numbers
+  const mainNumberFrequency: NumberFrequency = {};
+  for (let i = 1; i <= 50; i++) {
+    mainNumberFrequency[i] = 0;
+  }
+  
+  // Calculate frequency of euro numbers
+  const euroNumberFrequency: NumberFrequency = {};
+  for (let i = 1; i <= 12; i++) {
+    euroNumberFrequency[i] = 0;
+  }
+  
+  // Calculate sums over time
+  const dates: string[] = [];
+  const mainSums: number[] = [];
+  const euroSums: number[] = [];
+  
+  historicalDraws.forEach(draw => {
+    // Count main numbers
+    draw.mainNumbers.forEach(num => {
+      mainNumberFrequency[num]++;
+    });
+    
+    // Count euro numbers
+    draw.euroNumbers.forEach(num => {
+      euroNumberFrequency[num]++;
+    });
+    
+    // Calculate sums for trend chart
+    const mainSum = draw.mainNumbers.reduce((sum, num) => sum + num, 0);
+    const euroSum = draw.euroNumbers.reduce((sum, num) => sum + num, 0);
+    
+    const date = new Date(draw.date || '');
+    const formattedDate = date.toLocaleDateString(navigator.language, { 
+      year: 'numeric', 
+      month: 'short'
+    });
+    
+    dates.push(formattedDate);
+    mainSums.push(mainSum);
+    euroSums.push(euroSum);
+  });
+  
+  createMainNumbersChart(translations, mainNumberFrequency);
+  createEuroNumbersChart(translations, euroNumberFrequency);
+  createSumTrendsChart(translations, dates, mainSums, euroSums);
+}
+
+function createMainNumbersChart(
+  translations: Translations,
+  mainNumberFrequency: NumberFrequency
+): void {
+  const mainCtx = document.getElementById('mainNumbersChart') as HTMLCanvasElement | null;
+  if (mainCtx) {
+    // Sort numbers by frequency (high to low)
+    const sortedEntries = Object.entries(mainNumberFrequency)
+      .map(([number, frequency]) => ({ number: parseInt(number), frequency }))
+      .sort((a, b) => b.frequency - a.frequency);
+    
+    const sortedLabels = sortedEntries.map(entry => entry.number.toString());
+    const sortedData = sortedEntries.map(entry => entry.frequency);
+    
+    new Chart(mainCtx, {
+      type: 'bar',
+      data: {
+        labels: sortedLabels,
+        datasets: [{
+          label: translations.frequency,
+          data: sortedData,
+          backgroundColor: 'rgba(239, 68, 68, 0.7)',
+          borderColor: 'rgba(239, 68, 68, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              title: function(tooltipItems) {
+                return `${translations.number}: ${tooltipItems[0].label}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)',
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 10
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+function createEuroNumbersChart(
+  translations: Translations,
+  euroNumberFrequency: NumberFrequency
+): void {
+  const euroCtx = document.getElementById('euroNumbersChart') as HTMLCanvasElement | null;
+  if (euroCtx) {
+    // Sort numbers by frequency (high to low)
+    const sortedEntries = Object.entries(euroNumberFrequency)
+      .map(([number, frequency]) => ({ number: parseInt(number), frequency }))
+      .sort((a, b) => b.frequency - a.frequency);
+    
+    const sortedLabels = sortedEntries.map(entry => entry.number.toString());
+    const sortedData = sortedEntries.map(entry => entry.frequency);
+    
+    new Chart(euroCtx, {
+      type: 'bar',
+      data: {
+        labels: sortedLabels,
+        datasets: [{
+          label: translations.frequency,
+          data: sortedData,
+          backgroundColor: 'rgba(245, 158, 11, 0.7)',
+          borderColor: 'rgba(245, 158, 11, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              title: function(tooltipItems) {
+                return `${translations.number}: ${tooltipItems[0].label}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+function createSumTrendsChart(
+  translations: Translations,
+  dates: string[],
+  mainSums: number[],
+  euroSums: number[]
+): void {
+  const sumCtx = document.getElementById('sumTrendsChart') as HTMLCanvasElement | null;
+  if (sumCtx) {
+    // Get only the last 50 draws for better visibility
+    const recentDates = dates.slice(-50);
+    const recentMainSums = mainSums.slice(-50);
+    const recentEuroSums = euroSums.slice(-50);
+    
+    new Chart(sumCtx, {
+      type: 'line',
+      data: {
+        labels: recentDates,
+        datasets: [
+          {
+            label: translations.mainNumbersSum,
+            data: recentMainSums,
+            borderColor: 'rgba(239, 68, 68, 1)',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true
+          },
+          {
+            label: translations.euroNumbersSum,
+            data: recentEuroSums,
+            borderColor: 'rgba(245, 158, 11, 1)',
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          }
+        },
+        scales: {
+          y: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)',
+              maxRotation: 45,
+              autoSkip: true,
+              maxTicksLimit: 10
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+function displayHotColdNumbers(historicalDraws: EurojackpotNumbers[]): void {
+  // Calculate frequency of main numbers
+  const mainNumberFrequency: NumberFrequency = {};
+  for (let i = 1; i <= 50; i++) {
+    mainNumberFrequency[i] = 0;
+  }
+  
+  // Calculate frequency of euro numbers
+  const euroNumberFrequency: NumberFrequency = {};
+  for (let i = 1; i <= 12; i++) {
+    euroNumberFrequency[i] = 0;
+  }
+  
+  historicalDraws.forEach(draw => {
+    // Count main numbers
+    draw.mainNumbers.forEach(num => {
+      mainNumberFrequency[num]++;
+    });
+    
+    // Count euro numbers
+    draw.euroNumbers.forEach(num => {
+      euroNumberFrequency[num]++;
+    });
+  });
+  
+  // Sort main numbers by frequency
+  const sortedMainNumbers: NumberWithFrequency[] = Object.entries(mainNumberFrequency)
+    .map(([number, frequency]) => ({ number: parseInt(number), frequency }))
+    .sort((a, b) => b.frequency - a.frequency);
+  
+  // Sort euro numbers by frequency
+  const sortedEuroNumbers: NumberWithFrequency[] = Object.entries(euroNumberFrequency)
+    .map(([number, frequency]) => ({ number: parseInt(number), frequency }))
+    .sort((a, b) => b.frequency - a.frequency);
+  
+  // Get hot numbers (top 5)
+  const hotMainNumbers = sortedMainNumbers.slice(0, 5);
+  const hotEuroNumbers = sortedEuroNumbers.slice(0, 3);
+  
+  // Get cold numbers (bottom 5)
+  const coldMainNumbers = sortedMainNumbers.slice(-5).reverse();
+  const coldEuroNumbers = sortedEuroNumbers.slice(-3).reverse();
+  
+  displayNumbersInContainer('hotMainNumbers', hotMainNumbers, 'red-500');
+  displayNumbersInContainer('hotEuroNumbers', hotEuroNumbers, 'yellow-500');
+  displayNumbersInContainer('coldMainNumbers', coldMainNumbers, 'red-900');
+  displayNumbersInContainer('coldEuroNumbers', coldEuroNumbers, 'yellow-900');
+}
+
+function displayNumbersInContainer(
+  containerId: string,
+  numbers: NumberWithFrequency[],
+  colorClass: string
+): void {
+  const container = document.getElementById(containerId);
+  if (container) {
+    numbers.forEach(item => {
+      const numberBall = document.createElement('div');
+      numberBall.className = 'flex flex-col items-center';
+      
+      // Use specific color values instead of Tailwind classes for better compatibility
+      const bgColor = 
+        colorClass === 'red-500' ? 'rgb(239, 68, 68)' :
+        colorClass === 'yellow-500' ? 'rgb(245, 158, 11)' :
+        colorClass === 'red-900' ? 'rgb(127, 29, 29)' :
+        colorClass === 'yellow-900' ? 'rgb(120, 53, 15)' : 
+        '#888888'; // Fallback gray
+      
+      numberBall.innerHTML = `
+        <span class="inline-block w-8 h-8 rounded-full text-white text-center leading-8" style="background-color: ${bgColor}">${item.number}</span>
+        <span class="text-xs text-gray-300 mt-1">${item.frequency}x</span>
+      `;
+      container.appendChild(numberBall);
+    });
+  }
+}

@@ -44,7 +44,9 @@ const alternateURLs = {
   
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.json">
   
   <!-- Canonical and alternate language URLs -->
@@ -115,6 +117,7 @@ const alternateURLs = {
       <p class="mb-2">© 2025 How To Lose Money Fast</p>
       <div class="mb-4">
         <a href={lang === 'en' ? '/tutorial' : `/${lang}/tutorial`} class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.tutorial">Tutorial</a>
+        <a href={lang === 'en' ? '/history' : `/${lang}/history`} class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.history">History</a>
         <a href={lang === 'en' ? '/impressum' : `/${lang}/impressum`} id="impressum-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.impressum">Impressum</a>
         <a href={lang === 'en' ? '/privacy' : `/${lang}/privacy`} id="privacy-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.privacy">Privacy Policy</a>
       </div>

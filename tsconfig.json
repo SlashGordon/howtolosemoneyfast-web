@@ -20,8 +20,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "react"
   },
-  "include": ["src/**/*.ts", "src/**/*.astro", "tests/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.astro", "tests/**/*.ts"],
   "exclude": ["node_modules"]
 }

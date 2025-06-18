@@ -78,6 +78,7 @@ export const translations: Translations = {
     },
     footer: {
       tutorial: "Tutorial",
+      history: "History",
       impressum: "Impressum",
       privacy: "Privacy Policy"
     },
@@ -154,6 +155,7 @@ export const translations: Translations = {
     },
     footer: {
       tutorial: "Anleitung",
+      history: "Historie",
       impressum: "Impressum",
       privacy: "Datenschutzerklärung"
     },
@@ -230,6 +232,7 @@ export const translations: Translations = {
     },
     footer: {
       tutorial: "Tutorial",
+      history: "Historial",
       impressum: "Aviso Legal",
       privacy: "Política de Privacidad"
     },

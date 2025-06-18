@@ -1,11 +1,13 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import eurojackpotIntegration from './scripts/eurojackpot-integration';
 
 export default defineConfig({
   site: 'https://howtolosemoneyfast.com',
   integrations: [
     tailwind(),
+    eurojackpotIntegration(),
     sitemap({
       i18n: {
         defaultLocale: 'en',
@@ -47,5 +49,19 @@ export default defineConfig({
   output: 'static',
   build: {
     assets: 'assets'
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: 'assets/js/[name].[hash].js',
+          chunkFileNames: 'assets/js/[name].[hash].js',
+          assetFileNames: 'assets/[ext]/[name].[hash].[ext]'
+        }
+      }
+    },
+    optimizeDeps: {
+      exclude: []
+    }
   }
 });

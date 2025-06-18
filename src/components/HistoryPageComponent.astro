@@ -1,0 +1,258 @@
+---
+import { historicalDraws } from '../data/historicalEurojackpot';
+
+export interface Props {
+  lang: string;
+  translations: {
+    backToHome: string;
+    title: string;
+    description: string;
+    downloadJson: string;
+    copyClipboard: string;
+    mainNumbersFreq: string;
+    euroNumbersFreq: string;
+    sumTrends: string;
+    hotColdNumbers: string;
+    hotMainNumbers: string;
+    hotEuroNumbers: string;
+    coldMainNumbers: string;
+    coldEuroNumbers: string;
+    historicalDraws: string;
+    date: string;
+    mainNumbers: string;
+    euroNumbers: string;
+    frequency: string;
+    mainNumbersSum: string;
+    euroNumbersSum: string;
+    number: string;
+    copiedSuccess: string;
+    copyError: string;
+  };
+}
+
+const { lang, translations } = Astro.props;
+const homeLink = lang === 'en' ? '/' : `/${lang}/`;
+const dateFormat = lang === 'en' ? 'en-US' : lang === 'de' ? 'de-DE' : 'es-ES';
+const downloadFilename = lang === 'en' ? 'eurojackpot-history.json' : 
+                         lang === 'de' ? 'eurojackpot-historie.json' : 
+                         'eurojackpot-historial.json';
+---
+
+<style>
+  .year-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  .year-content.expanded {
+    max-height: 5000px; /* Large enough to accommodate content */
+  }
+</style>
+
+<div class="container mx-auto px-4 py-16" 
+  data-history-container
+  data-frequency={translations.frequency}
+  data-number={translations.number}
+  data-main-numbers-sum={translations.mainNumbersSum}
+  data-euro-numbers-sum={translations.euroNumbersSum}
+  data-copied-success={translations.copiedSuccess}
+  data-copy-error={translations.copyError}
+  data-download-filename={downloadFilename}>
+  <header class="mb-8">
+    <a href={homeLink} class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← {translations.backToHome}</a>
+    <h1 class="text-4xl font-bold mb-4">{translations.title}</h1>
+    <p class="text-xl text-gray-300 mb-6">{translations.description}</p>
+    
+    <div class="flex flex-wrap gap-4 mb-8">
+      <button id="download-json" class="inline-flex bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center">
+        <span>{translations.downloadJson}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <button id="copy-json" class="inline-flex bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center">
+        <span>{translations.copyClipboard}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+          <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Statistics Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Frequency Charts -->
+    <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">{translations.mainNumbersFreq}</h2>
+      <canvas id="mainNumbersChart" height="300"></canvas>
+    </div>
+    
+    <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-yellow-300">{translations.euroNumbersFreq}</h2>
+      <canvas id="euroNumbersChart" height="300"></canvas>
+    </div>
+    
+    <!-- Trends Over Time -->
+    <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-blue-300">{translations.sumTrends}</h2>
+      <canvas id="sumTrendsChart" height="300"></canvas>
+    </div>
+    
+    <!-- Hot and Cold Numbers -->
+    <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-purple-300">{translations.hotColdNumbers}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-red-200">{translations.hotMainNumbers}</h3>
+          <div id="hotMainNumbers" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-yellow-200">{translations.hotEuroNumbers}</h3>
+          <div id="hotEuroNumbers" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-red-200">{translations.coldMainNumbers}</h3>
+          <div id="coldMainNumbers" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-yellow-200">{translations.coldEuroNumbers}</h3>
+          <div id="coldEuroNumbers" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Historical Draws Table -->
+  <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-4 text-green-300">{translations.historicalDraws}</h2>
+    
+    <div class="space-y-4">
+      {(() => {
+        // Group draws by year
+        const drawsByYear = {};
+        historicalDraws.forEach(draw => {
+          if (draw.date) {
+            const year = new Date(draw.date).getFullYear().toString();
+            if (!drawsByYear[year]) {
+              drawsByYear[year] = [];
+            }
+            drawsByYear[year].push(draw);
+          }
+        });
+        
+        // Sort years in descending order (newest first)
+        const years = Object.keys(drawsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+        
+        return years.map(year => (
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button 
+              class="w-full bg-gray-700 px-4 py-3 text-left font-semibold flex justify-between items-center hover:bg-gray-650 transition-colors"
+              onclick={`
+                const content = document.getElementById('year-${year}');
+                const icon = this.querySelector('svg');
+                content.classList.toggle('expanded');
+                icon.classList.toggle('rotate-180');
+              `}
+            >
+              <span class="text-green-200">{year} <span class="text-gray-400 text-sm ml-2">({drawsByYear[year].length} draws)</span></span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div id={`year-${year}`} class="year-content">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead>
+                    <tr class="bg-gray-750">
+                      <th class="px-4 py-3">{translations.date}</th>
+                      <th class="px-4 py-3">{translations.mainNumbers}</th>
+                      <th class="px-4 py-3">{translations.euroNumbers}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {drawsByYear[year].map((draw, index) => (
+                      <tr class={index % 2 === 0 ? "bg-gray-800" : "bg-gray-750"}>
+                        <td class="px-4 py-3 border-t border-gray-700">{new Date(draw.date || '').toLocaleDateString(dateFormat)}</td>
+                        <td class="px-4 py-3 border-t border-gray-700">
+                          <div class="flex flex-wrap gap-2">
+                            {draw.mainNumbers.map(num => (
+                              <span class="inline-block w-8 h-8 rounded-full bg-red-500 text-white text-center leading-8">{num}</span>
+                            ))}
+                          </div>
+                        </td>
+                        <td class="px-4 py-3 border-t border-gray-700">
+                          <div class="flex flex-wrap gap-2">
+                            {draw.euroNumbers.map(num => (
+                              <span class="inline-block w-8 h-8 rounded-full bg-yellow-500 text-white text-center leading-8">{num}</span>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        ));
+      })()}
+    </div>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+  </div>
+</div>
+
+<script>
+  import { initializeHistoryPage } from './historyPage';
+  import { historicalDraws } from '../data/historicalEurojackpot';
+  
+  // Get translations and other props from the data attributes
+  const historyContainer = document.querySelector('[data-history-container]');
+  if (historyContainer) {
+    const translations = {
+      frequency: historyContainer.getAttribute('data-frequency') || 'Frequency',
+      number: historyContainer.getAttribute('data-number') || 'Number',
+      mainNumbersSum: historyContainer.getAttribute('data-main-numbers-sum') || 'Main Numbers Sum',
+      euroNumbersSum: historyContainer.getAttribute('data-euro-numbers-sum') || 'Euro Numbers Sum',
+      copiedSuccess: historyContainer.getAttribute('data-copied-success') || 'JSON data copied to clipboard!',
+      copyError: historyContainer.getAttribute('data-copy-error') || 'Failed to copy to clipboard'
+    };
+    
+    const downloadFilename = historyContainer.getAttribute('data-download-filename') || 'eurojackpot-history.json';
+    
+    // Initialize the history page
+    initializeHistoryPage(translations, downloadFilename, historicalDraws);
+    
+    // Expand the current year by default
+    setTimeout(() => {
+      const currentYear = new Date().getFullYear().toString();
+      const currentYearElement = document.getElementById(`year-${currentYear}`);
+      if (currentYearElement) {
+        currentYearElement.classList.add('expanded');
+        // Rotate the arrow icon
+        const button = currentYearElement.previousElementSibling;
+        if (button) {
+          const icon = button.querySelector('svg');
+          if (icon) icon.classList.add('rotate-180');
+        }
+      } else {
+        // If current year doesn't exist, expand the most recent year
+        const yearContainers = document.querySelectorAll('[id^="year-"]');
+        if (yearContainers.length > 0) {
+          yearContainers[0].classList.add('expanded');
+          // Rotate the arrow icon
+          const button = yearContainers[0].previousElementSibling;
+          if (button) {
+            const icon = button.querySelector('svg');
+            if (icon) icon.classList.add('rotate-180');
+          }
+        }
+      }
+    }, 0);
+  }
+</script>

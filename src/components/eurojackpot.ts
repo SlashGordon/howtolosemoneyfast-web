@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-import { EurojackpotNumbers, EurojackpotResult } from '../types/eurojackpot';
+import { type EurojackpotNumbers, type EurojackpotResult } from '../types/eurojackpot';
 import { addNumbers, getNumbersFromCookie, saveNumbersToCookie } from '../utils/cookieService';
 import { validateNumbers, compareWithHistorical } from '../utils/eurojackpotService';
 import { calculateMoneyWasted } from '../utils/moneyWastedService';

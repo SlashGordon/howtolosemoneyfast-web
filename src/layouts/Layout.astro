@@ -1,0 +1,114 @@
+---
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import ConsentManager from '../components/ConsentManager.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+}
+
+const { 
+  title, 
+  description = "Discover how lottery games like EuroJackpot can waste your money. Track your spending and learn about smarter financial decisions.",
+  lang = "en"
+} = Astro.props;
+
+// Get the current URL path
+const { pathname } = Astro.url;
+const canonicalURL = new URL(pathname, Astro.site);
+
+// Define alternate URLs for different languages
+const alternateURLs = {
+  en: new URL(pathname.replace(/^\/(de|es)\//, '/').replace(/^\/(de|es)$/, '/'), Astro.site),
+  de: new URL(lang === 'de' ? pathname : pathname.replace(/^\/(es)\//, '/de/').replace(/^\/(es)$/, '/de').replace(/^\//, '/de/'), Astro.site),
+  es: new URL(lang === 'es' ? pathname : pathname.replace(/^\/(de)\//, '/es/').replace(/^\/(de)$/, '/es').replace(/^\//, '/es/'), Astro.site)
+};
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="keywords" content="money wasting, lottery, EuroJackpot, financial education, money management">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalURL}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  
+  <!-- Canonical and alternate language URLs -->
+  <link rel="canonical" href={canonicalURL}>
+  <link rel="alternate" href={alternateURLs.en} hreflang="en" />
+  <link rel="alternate" href={alternateURLs.de} hreflang="de" />
+  <link rel="alternate" href={alternateURLs.es} hreflang="es" />
+  <link rel="alternate" href={alternateURLs.en} hreflang="x-default" />
+  
+  <script>
+    // Add structured data for better SEO
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "How To Lose Money Fast",
+      "description": "Learn about financial mistakes and track lottery spending with our EuroJackpot simulator",
+      "url": window.location.origin,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${window.location.origin}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+  </script>
+  <ConsentManager />
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-[Poppins]">
+  <!-- Cookie Consent Banner -->
+  <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 z-50 border-t border-gray-700 hidden">
+    <div class="container mx-auto max-w-4xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="font-bold text-lg mb-2" data-i18n="consent.title">Your Privacy Settings</h3>
+          <p class="text-sm text-gray-300" data-i18n="consent.description">
+            This website uses cookies and external services to enhance your experience.
+            We use Google Analytics for statistics and Google Fonts for display.
+            You can choose whether you want to enable these services.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button id="accept-necessary" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm" data-i18n="consent.necessary">Necessary only</button>
+          <button id="accept-all" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm" data-i18n="consent.acceptAll">Accept all</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Switcher -->
+  <LanguageSwitcher />
+  
+  <slot />
+  
+  <footer class="bg-gray-800 py-6">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+      <p class="mb-2">© 2025 How To Lose Money Fast</p>
+      <div class="mb-4">
+        <a href={lang === 'en' ? '/impressum' : `/${lang}/impressum`} id="impressum-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.impressum">Impressum</a>
+        <a href={lang === 'en' ? '/privacy' : `/${lang}/privacy`} id="privacy-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.privacy">Privacy Policy</a>
+      </div>
+      <div class="text-sm text-gray-500">
+        <p>This website is for educational purposes only. Learn about the financial impact of lottery games.</p>
+        <p class="mt-2">Keywords: lottery analysis, money management, financial education, EuroJackpot statistics</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

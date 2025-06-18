@@ -1,4 +1,4 @@
-import { encrypt, decrypt, initContactInfo } from '../../src/utils/contactEncryption';
+import { encrypt, decrypt } from '../../src/utils/contactEncryption';
 
 describe('Contact Encryption Utils', () => {
   test('encrypt should correctly encrypt strings', () => {

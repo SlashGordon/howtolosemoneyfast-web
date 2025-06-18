@@ -50,6 +50,20 @@ describe('profitLossCalculator', () => {
       
       expect(result).toEqual(-2.5);
     });
+    
+    it('should use default ticket price when not provided', () => {
+      const draw = {
+        mainNumbers: [1, 2, 3, 4, 5],
+        euroNumbers: [1, 2],
+        prizeDistribution: {
+          '3 + 2': 100
+        }
+      };
+      
+      const result = calculateProfitLoss(draw, 3, 2);
+      
+      expect(result).toEqual(98); // 100 - 2 (default ticket price)
+    });
   });
   
   describe('isWinner', () => {

@@ -1,5 +1,9 @@
+---
+---
+
+<script>
 // Cookie consent management
-function setCookie(name, value, days) {
+function setCookie(name: string, value: string, days?: number): void {
   let expires = '';
   if (days) {
     const date = new Date();
@@ -9,7 +13,7 @@ function setCookie(name, value, days) {
   document.cookie = name + '=' + (value || '') + expires + '; path=/; SameSite=Lax';
 }
 
-function getCookie(name) {
+function getCookie(name: string): string | null {
   const nameEQ = name + '=';
   const ca = document.cookie.split(';');
   for (let i = 0; i < ca.length; i++) {
@@ -20,14 +24,26 @@ function getCookie(name) {
   return null;
 }
 
-function loadGoogleAnalytics() {
+interface ConsentEventDetail {
+  analytics: boolean;
+}
+
+// Add type definition for gtag
+interface Window {
+  dataLayer: any[];
+  gtag: (...args: any[]) => void;
+}
+
+function loadGoogleAnalytics(): void {
   const script = document.createElement('script');
   script.async = true;
   script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DJWEGBDXZ4';
   document.head.appendChild(script);
   
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(...args: any[]): void {
+    window.dataLayer.push(arguments);
+  }
   gtag('js', new Date());
   gtag('config', 'G-DJWEGBDXZ4');
   
@@ -35,24 +51,29 @@ function loadGoogleAnalytics() {
   localStorage.setItem('analytics_consent', 'true');
   
   // Dispatch event for other scripts
-  window.dispatchEvent(new CustomEvent('consentUpdated', {
+  window.dispatchEvent(new CustomEvent<ConsentEventDetail>('consentUpdated', {
     detail: { analytics: true }
   }));
 }
 
-function loadGoogleFonts() {
+function loadGoogleFonts(): void {
   const link = document.createElement('link');
   link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap';
   link.rel = 'stylesheet';
   document.head.appendChild(link);
 }
 
-function initConsent() {
+function initConsent(): void {
   const consentBanner = document.getElementById('consent-banner');
   const acceptAllBtn = document.getElementById('accept-all');
   const acceptNecessaryBtn = document.getElementById('accept-necessary');
   const analyticsConsent = getCookie('analytics-consent');
   const fontsConsent = getCookie('fonts-consent');
+  
+  if (!consentBanner || !acceptAllBtn || !acceptNecessaryBtn) {
+    console.error('Consent elements not found');
+    return;
+  }
   
   // Show banner if no consent has been given yet
   if (analyticsConsent === null || fontsConsent === null) {
@@ -86,3 +107,4 @@ function initConsent() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initConsent);
+</script>

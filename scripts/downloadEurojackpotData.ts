@@ -1,8 +1,24 @@
-// downloadEurojackpotData.js
+// downloadEurojackpotData.ts
 import fs from 'fs';
 import https from 'https';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+// Define the structure of the raw data from the API
+interface RawEurojackpotData {
+  regular_numbers: number[];
+  bonus_numbers: number[];
+  draw_date: string;
+  prize_distribution: Record<string, number>;
+}
+
+// Define the structure of our processed data
+interface EurojackpotNumbers {
+  mainNumbers: number[];
+  euroNumbers: number[];
+  date: string;
+  prizeDistribution: Record<string, number>;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.join(__dirname, '../src/data/historicalEurojackpot.ts');
@@ -21,10 +37,10 @@ https.get(url, (res) => {
 
   res.on('end', () => {
     try {
-      const jsonData = JSON.parse(data);
+      const jsonData = JSON.parse(data) as RawEurojackpotData[];
       
       // Convert the JSON data to EurojackpotNumbers format
-      const eurojackpotData = jsonData.map(item => ({
+      const eurojackpotData: EurojackpotNumbers[] = jsonData.map(item => ({
         mainNumbers: item.regular_numbers.sort((a, b) => a - b),
         euroNumbers: item.bonus_numbers.sort((a, b) => a - b),
         date: item.draw_date,
@@ -32,12 +48,7 @@ https.get(url, (res) => {
       }));
 
       // Generate TypeScript file content
-      const tsContent = `import { EurojackpotNumbers } from '../types/eurojackpot';
-
-// Historical EuroJackpot data
-// Auto-generated from https://github.com/SlashGordon/howtolosemoneyfast/blob/main/results.json
-export const historicalDraws: EurojackpotNumbers[] = ${JSON.stringify(eurojackpotData, null, 2)};
-`;
+      const tsContent = `import { EurojackpotNumbers } from '../types/eurojackpot';\n\n// Historical EuroJackpot data\n// Auto-generated from https://github.com/SlashGordon/howtolosemoneyfast/blob/main/results.json\nexport const historicalDraws: EurojackpotNumbers[] = ${JSON.stringify(eurojackpotData, null, 2)};\n`;
 
       // Write to file
       fs.writeFileSync(outputPath, tsContent);

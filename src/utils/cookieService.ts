@@ -1,4 +1,4 @@
-import { EurojackpotNumbers } from '../types/eurojackpot';
+import { type EurojackpotNumbers } from '../types/eurojackpot';
 
 const COOKIE_NAME = 'eurojackpot_numbers';
 const COOKIE_EXPIRY_DAYS = 30;

@@ -24,6 +24,43 @@ function getCookie(name: string): string | null {
   return null;
 }
 
+// Block all tracking scripts and cookies before consent
+function blockTrackingScripts() {
+  // Create a MutationObserver to detect and block tracking scripts
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeName === 'SCRIPT') {
+            const script = node as HTMLScriptElement;
+            if (script.src && (
+                script.src.includes('google-analytics.com') || 
+                script.src.includes('googletagmanager.com') ||
+                script.src.includes('analytics') ||
+                script.src.includes('tracking')
+              )) {
+              if (getCookie('analytics-consent') !== 'true') {
+                script.type = 'javascript/blocked';
+                script.setAttribute('data-blocked', 'true');
+                console.log('Blocked tracking script:', script.src);
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+  
+  // Start observing document for script additions
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+  
+  // Return the observer so it can be disconnected if needed
+  return observer;
+}
+
 interface ConsentEventDetail {
   analytics: boolean;
 }
@@ -45,7 +82,10 @@ function loadGoogleAnalytics(): void {
     window.dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', 'G-DJWEGBDXZ4');
+  gtag('config', 'G-DJWEGBDXZ4', {
+    'anonymize_ip': true,
+    'cookie_flags': 'SameSite=None;Secure'
+  });
   
   // Store consent in localStorage for other pages
   localStorage.setItem('analytics_consent', 'true');
@@ -75,6 +115,9 @@ function initConsent(): void {
     return;
   }
   
+  // Start blocking tracking scripts
+  const scriptObserver = blockTrackingScripts();
+  
   // Show banner if no consent has been given yet
   if (analyticsConsent === null || fontsConsent === null) {
     consentBanner.classList.remove('hidden');
@@ -96,12 +139,26 @@ function initConsent(): void {
     loadGoogleAnalytics();
     loadGoogleFonts();
     consentBanner.classList.add('hidden');
+    
+    // Reload any blocked scripts
+    const blockedScripts = document.querySelectorAll('script[data-blocked="true"]');
+    blockedScripts.forEach(script => {
+      const newScript = document.createElement('script');
+      if (script.src) newScript.src = script.src;
+      if (script.textContent) newScript.textContent = script.textContent;
+      script.parentNode?.replaceChild(newScript, script);
+    });
   });
   
   acceptNecessaryBtn.addEventListener('click', function() {
     setCookie('analytics-consent', 'false', 365);
     setCookie('fonts-consent', 'false', 365);
     consentBanner.classList.add('hidden');
+    
+    // Remove any tracking cookies that might have been set
+    document.cookie = '_ga=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = '_gat=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = '_gid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   });
 }
 

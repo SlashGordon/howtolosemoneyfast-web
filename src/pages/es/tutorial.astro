@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import tutorialImage from '../../assets/images/tutorial/step1.png';
+---
+
+<Layout title="Tutorial - Cómo perder dinero rápidamente" description="Aprenda a usar el verificador de números de EuroJackpot y comprenda el impacto financiero de los juegos de lotería." lang="es">
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="/es" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Volver a la página principal</a>
+      <h1 class="text-4xl font-bold mb-4">Tutorial</h1>
+      <p class="text-xl text-gray-300">Aprenda a usar nuestras herramientas y comprenda el impacto financiero de los juegos de lotería.</p>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Verificador de números de EuroJackpot</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Paso 1: Ingrese sus números</h3>
+          <p class="mb-4">Ingrese 5 números principales (1-50) y 2 números Euro (1-12) en los campos de entrada. Estos son los números que típicamente juega en EuroJackpot.</p>
+          <Image 
+            src={tutorialImage} 
+            alt="Ingrese sus números" 
+            width={800} 
+            height={450} 
+            class="rounded-lg border border-gray-600" 
+            quality="mid"
+            loading="eager"
+          />
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Paso 2: Establecer precio del boleto</h3>
+          <p class="mb-4">Ingrese el precio que paga por un solo boleto. El valor predeterminado es €2.60, pero puede variar según su país.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Paso 3: Guardar y verificar números</h3>
+          <p class="mb-4">Haga clic en el botón "Guardar y verificar" para guardar sus números y compararlos con sorteos históricos.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Paso 4: Analizar resultados</h3>
+          <p class="mb-4">Revise los resultados para ver si sus números han ganado alguna vez en sorteos anteriores. La herramienta le mostrará:</p>
+          <ul class="list-disc pl-6 space-y-2 text-gray-300">
+            <li>Total de sorteos verificados</li>
+            <li>Sorteos ganadores (si los hay)</li>
+            <li>Porcentaje de victorias</li>
+            <li>Dinero total gastado en boletos</li>
+            <li>Dinero total ganado (si lo hay)</li>
+            <li>Beneficio/pérdida neta</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Paso 5: Guardar múltiples conjuntos de números</h3>
+          <p class="mb-4">Puede guardar múltiples conjuntos de números para comparar su rendimiento. Cada conjunto se almacena localmente en su navegador.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Comprender el impacto financiero</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Rastreador de dinero desperdiciado</h3>
+          <p class="mb-4">El Rastreador de dinero desperdiciado le muestra cuánto dinero ha gastado en boletos de lotería a lo largo del tiempo y lo compara con los posibles rendimientos de inversión.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Retorno de inversión (ROI)</h3>
+          <p class="mb-4">El cálculo del ROI le muestra el porcentaje de su dinero que recupera al jugar a la lotería. Para la mayoría de los jugadores, este es un número negativo.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Comparación con ETF</h3>
+          <p class="mb-4">Vea cuánto dinero podría haber ganado si hubiera invertido su dinero de boletos de lotería en un ETF (Fondo Cotizado en Bolsa) en su lugar.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Consejos para usar este sitio web</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Importación masiva</h3>
+          <p class="mb-4">Use la función "Importación masiva" para agregar varios conjuntos de números a la vez. Esto es útil si juega regularmente los mismos números.</p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-400 mb-2">Formato de ejemplo para importación masiva:</p>
+            <p class="text-sm text-gray-400 mb-2">Cada array contiene 7 números: los primeros 5 son números principales (1-50) y los últimos 2 son números Euro (1-12).</p>
+            <pre class="text-xs text-green-400 overflow-x-auto">[
+    [3, 12, 26, 28, 47, 2, 11],
+    [8, 11, 18, 19, 47, 4, 6],
+    [1, 2, 29, 40, 49, 6, 7],
+    [14, 18, 34, 36, 42, 4, 6],
+    [2, 4, 12, 24, 48, 9, 12],
+    [7, 13, 29, 39, 43, 1, 7],
+    [9, 26, 34, 35, 42, 2, 10],
+    [14, 16, 17, 28, 45, 7, 12]
+]</pre>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Rango de fechas</h3>
+          <p class="mb-4">Use el filtro de rango de fechas para verificar sus números contra períodos de tiempo específicos. Esto es útil si comenzó a jugar recientemente.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Opciones de idioma</h3>
+          <p class="mb-4">Puede cambiar entre inglés, alemán y español usando el selector de idioma en la esquina superior derecha.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import tutorialImage from '../assets/images/tutorial/step1.png';
+---
+
+<Layout title="Tutorial - How To Lose Money Fast" description="Learn how to use the EuroJackpot number checker and understand the financial impact of lottery games.">
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="/" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Home</a>
+      <h1 class="text-4xl font-bold mb-4">Tutorial</h1>
+      <p class="text-xl text-gray-300">Learn how to use our tools and understand the financial impact of lottery games.</p>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">EuroJackpot Number Checker</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Step 1: Enter Your Numbers</h3>
+          <p class="mb-4">Enter 5 main numbers (1-50) and 2 Euro numbers (1-12) in the input fields. These are the numbers you typically play in EuroJackpot.</p>
+          <Image 
+            src={tutorialImage} 
+            alt="Enter your numbers" 
+            width={800} 
+            height={450} 
+            class="rounded-lg border border-gray-600" 
+            quality="mid"
+            loading="eager"
+          />
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Step 2: Set Ticket Price</h3>
+          <p class="mb-4">Enter the price you pay for a single ticket. The default is €2.60, but this may vary depending on your country.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Step 3: Save & Check Numbers</h3>
+          <p class="mb-4">Click the "Save & Check Numbers" button to save your numbers and check them against historical draws.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Step 4: Analyze Results</h3>
+          <p class="mb-4">Review the results to see if your numbers have ever won in past draws. The tool will show you:</p>
+          <ul class="list-disc pl-6 space-y-2 text-gray-300">
+            <li>Total draws checked</li>
+            <li>Winning draws (if any)</li>
+            <li>Win percentage</li>
+            <li>Total money spent on tickets</li>
+            <li>Total money won (if any)</li>
+            <li>Net profit/loss</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Step 5: Save Multiple Number Sets</h3>
+          <p class="mb-4">You can save multiple sets of numbers to compare their performance. Each set is stored locally in your browser.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Understanding the Financial Impact</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Money Wasted Tracker</h3>
+          <p class="mb-4">The Money Wasted Tracker shows you how much money you've spent on lottery tickets over time and compares it to potential investment returns.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Return on Investment (ROI)</h3>
+          <p class="mb-4">The ROI calculation shows you the percentage of your money that you get back from playing the lottery. For most players, this is a negative number.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">ETF Comparison</h3>
+          <p class="mb-4">See how much money you could have made if you had invested your lottery ticket money in an ETF (Exchange-Traded Fund) instead.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Tips for Using This Website</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Bulk Import</h3>
+          <p class="mb-4">Use the "Bulk Import" feature to add multiple sets of numbers at once. This is useful if you play the same numbers regularly.</p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-400 mb-2">Example format for bulk import:</p>
+            <p class="text-sm text-gray-400 mb-2">Each array contains 7 numbers: the first 5 are main numbers (1-50) and the last 2 are Euro numbers (1-12).</p>
+            <pre class="text-xs text-green-400 overflow-x-auto">[
+    [3, 12, 26, 28, 47, 2, 11],
+    [8, 11, 18, 19, 47, 4, 6],
+    [1, 2, 29, 40, 49, 6, 7],
+    [14, 18, 34, 36, 42, 4, 6],
+    [2, 4, 12, 24, 48, 9, 12],
+    [7, 13, 29, 39, 43, 1, 7],
+    [9, 26, 34, 35, 42, 2, 10],
+    [14, 16, 17, 28, 45, 7, 12]
+]</pre>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Date Range</h3>
+          <p class="mb-4">Use the date range filter to check your numbers against specific time periods. This is helpful if you only started playing recently.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Language Options</h3>
+          <p class="mb-4">You can switch between English, German, and Spanish using the language selector in the top-right corner.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

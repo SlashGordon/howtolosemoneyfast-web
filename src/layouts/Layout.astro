@@ -42,6 +42,11 @@ const alternateURLs = {
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+  
   <!-- Canonical and alternate language URLs -->
   <link rel="canonical" href={canonicalURL}>
   <link rel="alternate" href={alternateURLs.en} hreflang="en" />
@@ -78,11 +83,19 @@ const alternateURLs = {
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div class="flex-1">
           <h3 class="font-bold text-lg mb-2" data-i18n="consent.title">Your Privacy Settings</h3>
-          <p class="text-sm text-gray-300" data-i18n="consent.description">
+          <p class="text-sm text-gray-300 mb-3" data-i18n="consent.description">
             This website uses cookies and external services to enhance your experience.
             We use Google Analytics for statistics and Google Fonts for display.
             You can choose whether you want to enable these services.
           </p>
+          <div class="text-xs text-gray-400 mb-3">
+            <p data-i18n="consent.acceptAllText">By clicking "Accept all", you consent to the use of ALL cookies and trackers.</p>
+            <p data-i18n="consent.necessaryText">By clicking "Necessary only", only technically required cookies will be used.</p>
+            <p>
+              <span data-i18n="consent.moreInfo">You can find more information in our</span> 
+              <a href={lang === 'en' ? '/privacy' : `/${lang}/privacy`} class="underline hover:text-blue-300" data-i18n="footer.privacy">Privacy Policy</a>.
+            </p>
+          </div>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <button id="accept-necessary" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm" data-i18n="consent.necessary">Necessary only</button>
@@ -101,6 +114,7 @@ const alternateURLs = {
     <div class="container mx-auto px-4 text-center text-gray-400">
       <p class="mb-2">© 2025 How To Lose Money Fast</p>
       <div class="mb-4">
+        <a href={lang === 'en' ? '/tutorial' : `/${lang}/tutorial`} class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.tutorial">Tutorial</a>
         <a href={lang === 'en' ? '/impressum' : `/${lang}/impressum`} id="impressum-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.impressum">Impressum</a>
         <a href={lang === 'en' ? '/privacy' : `/${lang}/privacy`} id="privacy-link" class="text-blue-400 hover:text-blue-300 mx-2" data-i18n="footer.privacy">Privacy Policy</a>
       </div>

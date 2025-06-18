@@ -71,9 +71,13 @@ export const translations: Translations = {
       title: "Your Privacy Settings",
       description: "This website uses cookies and external services to enhance your experience. We use Google Analytics for statistics and Google Fonts for display. You can choose whether you want to enable these services.",
       necessary: "Necessary only",
-      acceptAll: "Accept all"
+      acceptAll: "Accept all",
+      acceptAllText: "By clicking \"Accept all\", you consent to the use of ALL cookies and trackers.",
+      necessaryText: "By clicking \"Necessary only\", only technically required cookies will be used.",
+      moreInfo: "You can find more information in our Privacy Policy."
     },
     footer: {
+      tutorial: "Tutorial",
       impressum: "Impressum",
       privacy: "Privacy Policy"
     },
@@ -143,9 +147,13 @@ export const translations: Translations = {
       title: "Ihre Datenschutzeinstellungen",
       description: "Diese Website verwendet Cookies und externe Dienste, um Ihr Nutzererlebnis zu verbessern. Wir verwenden Google Analytics für Statistiken und Google Fonts für die Darstellung. Sie können wählen, ob Sie diese Dienste aktivieren möchten.",
       necessary: "Nur notwendige",
-      acceptAll: "Alle akzeptieren"
+      acceptAll: "Alle akzeptieren",
+      acceptAllText: "Durch Klicken auf \"Alle akzeptieren\" stimmen Sie der Verwendung ALLER Cookies und Tracker zu.",
+      necessaryText: "Durch Klicken auf \"Nur notwendige\" werden nur technisch erforderliche Cookies verwendet.",
+      moreInfo: "Weitere Informationen finden Sie in unserer Datenschutzerklärung."
     },
     footer: {
+      tutorial: "Anleitung",
       impressum: "Impressum",
       privacy: "Datenschutzerklärung"
     },
@@ -215,9 +223,13 @@ export const translations: Translations = {
       title: "Su configuración de privacidad",
       description: "Este sitio web utiliza cookies y servicios externos para mejorar su experiencia. Utilizamos Google Analytics para estadísticas y Google Fonts para la visualización. Puede elegir si desea habilitar estos servicios.",
       necessary: "Solo necesarias",
-      acceptAll: "Aceptar todas"
+      acceptAll: "Aceptar todas",
+      acceptAllText: "Al hacer clic en \"Aceptar todas\", usted consiente el uso de TODAS las cookies y rastreadores.",
+      necessaryText: "Al hacer clic en \"Solo necesarias\", solo se utilizarán las cookies técnicamente necesarias.",
+      moreInfo: "Puede encontrar más información en nuestra Política de Privacidad."
     },
     footer: {
+      tutorial: "Tutorial",
       impressum: "Aviso Legal",
       privacy: "Política de Privacidad"
     },

@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import tutorialImage from '../../assets/images/tutorial/step1.png';
+---
+
+<Layout title="Anleitung - Wie man schnell Geld verliert" description="Lernen Sie, wie man den EuroJackpot-Nummernprüfer verwendet und verstehen Sie die finanziellen Auswirkungen von Lotteriespielen." lang="de">
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="/de" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Zurück zur Startseite</a>
+      <h1 class="text-4xl font-bold mb-4">Anleitung</h1>
+      <p class="text-xl text-gray-300">Lernen Sie, wie man unsere Tools verwendet und verstehen Sie die finanziellen Auswirkungen von Lotteriespielen.</p>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">EuroJackpot Nummernprüfer</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Schritt 1: Geben Sie Ihre Zahlen ein</h3>
+          <p class="mb-4">Geben Sie 5 Hauptzahlen (1-50) und 2 Eurozahlen (1-12) in die Eingabefelder ein. Dies sind die Zahlen, die Sie typischerweise im EuroJackpot spielen.</p>
+          <Image 
+            src={tutorialImage} 
+            alt="Geben Sie Ihre Zahlen ein" 
+            width={800} 
+            height={450} 
+            class="rounded-lg border border-gray-600" 
+            quality="mid"
+            loading="eager"
+          />
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Schritt 2: Ticketpreis festlegen</h3>
+          <p class="mb-4">Geben Sie den Preis ein, den Sie für ein einzelnes Ticket bezahlen. Der Standardwert ist 2,60 €, kann aber je nach Land variieren.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Schritt 3: Zahlen speichern & prüfen</h3>
+          <p class="mb-4">Klicken Sie auf die Schaltfläche "Speichern & Prüfen", um Ihre Zahlen zu speichern und sie mit historischen Ziehungen zu vergleichen.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Schritt 4: Ergebnisse analysieren</h3>
+          <p class="mb-4">Überprüfen Sie die Ergebnisse, um zu sehen, ob Ihre Zahlen jemals in vergangenen Ziehungen gewonnen haben. Das Tool zeigt Ihnen:</p>
+          <ul class="list-disc pl-6 space-y-2 text-gray-300">
+            <li>Geprüfte Ziehungen insgesamt</li>
+            <li>Gewinnziehungen (falls vorhanden)</li>
+            <li>Gewinnrate</li>
+            <li>Gesamtausgaben für Tickets</li>
+            <li>Gesamtgewinne (falls vorhanden)</li>
+            <li>Nettogewinn/-verlust</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Schritt 5: Mehrere Zahlensätze speichern</h3>
+          <p class="mb-4">Sie können mehrere Zahlensätze speichern, um ihre Leistung zu vergleichen. Jeder Satz wird lokal in Ihrem Browser gespeichert.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Die finanziellen Auswirkungen verstehen</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Geldverschwendungs-Tracker</h3>
+          <p class="mb-4">Der Geldverschwendungs-Tracker zeigt Ihnen, wie viel Geld Sie im Laufe der Zeit für Lotterielose ausgegeben haben, und vergleicht es mit potenziellen Anlagerenditen.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Kapitalrendite (ROI)</h3>
+          <p class="mb-4">Die ROI-Berechnung zeigt Ihnen den Prozentsatz Ihres Geldes, den Sie durch das Spielen der Lotterie zurückerhalten. Für die meisten Spieler ist dies eine negative Zahl.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">ETF-Vergleich</h3>
+          <p class="mb-4">Sehen Sie, wie viel Geld Sie hätten verdienen können, wenn Sie Ihr Lotterieticket-Geld stattdessen in einen ETF (Exchange-Traded Fund) investiert hätten.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-red-300">Tipps zur Nutzung dieser Website</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Massenimport</h3>
+          <p class="mb-4">Verwenden Sie die Funktion "Massenimport", um mehrere Zahlensätze auf einmal hinzuzufügen. Dies ist nützlich, wenn Sie regelmäßig die gleichen Zahlen spielen.</p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-400 mb-2">Beispielformat für Massenimport:</p>
+            <p class="text-sm text-gray-400 mb-2">Jedes Array enthält 7 Zahlen: die ersten 5 sind Hauptzahlen (1-50) und die letzten 2 sind Eurozahlen (1-12).</p>
+            <pre class="text-xs text-green-400 overflow-x-auto">[
+    [3, 12, 26, 28, 47, 2, 11],
+    [8, 11, 18, 19, 47, 4, 6],
+    [1, 2, 29, 40, 49, 6, 7],
+    [14, 18, 34, 36, 42, 4, 6],
+    [2, 4, 12, 24, 48, 9, 12],
+    [7, 13, 29, 39, 43, 1, 7],
+    [9, 26, 34, 35, 42, 2, 10],
+    [14, 16, 17, 28, 45, 7, 12]
+]</pre>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Datumsbereich</h3>
+          <p class="mb-4">Verwenden Sie den Datumsbereichsfilter, um Ihre Zahlen mit bestimmten Zeiträumen zu vergleichen. Dies ist hilfreich, wenn Sie erst kürzlich mit dem Spielen begonnen haben.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-2">Sprachoptionen</h3>
+          <p class="mb-4">Sie können zwischen Englisch, Deutsch und Spanisch über die Sprachauswahl in der oberen rechten Ecke wechseln.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

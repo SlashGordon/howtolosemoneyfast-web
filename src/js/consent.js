@@ -23,13 +23,21 @@ function getCookie(name) {
 function loadGoogleAnalytics() {
   const script = document.createElement('script');
   script.async = true;
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'; // Replace with your GA ID
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DJWEGBDXZ4';
   document.head.appendChild(script);
   
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA ID
+  gtag('config', 'G-DJWEGBDXZ4');
+  
+  // Store consent in localStorage for other pages
+  localStorage.setItem('analytics_consent', 'true');
+  
+  // Dispatch event for other scripts
+  window.dispatchEvent(new CustomEvent('consentUpdated', {
+    detail: { analytics: true }
+  }));
 }
 
 function loadGoogleFonts() {

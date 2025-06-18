@@ -13,7 +13,8 @@ export default defineConfig({
         impressumEs: resolve(__dirname, 'impressum-es.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         privacyDe: resolve(__dirname, 'privacy-de.html'),
-        privacyEs: resolve(__dirname, 'privacy-es.html')
+        privacyEs: resolve(__dirname, 'privacy-es.html'),
+        error404: resolve(__dirname, '404.html')
       },
       output: {
         manualChunks: {

@@ -7,8 +7,28 @@
   <meta name="robots" content="noindex, follow">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./src/styles.css">
+  <script src="./src/js/consent.js" type="module"></script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen font-[Poppins] flex flex-col">
+  <!-- Cookie Consent Banner -->
+  <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 z-50 border-t border-gray-700 hidden">
+    <div class="container mx-auto max-w-4xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="font-bold text-lg mb-2">Your Privacy Settings</h3>
+          <p class="text-sm text-gray-300">
+            This website uses cookies and external services to enhance your experience.
+            We use Google Analytics for statistics and Google Fonts for display.
+            You can choose whether you want to enable these services.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button id="accept-necessary" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">Necessary only</button>
+          <button id="accept-all" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm">Accept all</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center justify-center">
     <div class="text-center">
       <div class="inline-block animate-bounce mb-4">

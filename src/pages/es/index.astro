@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EurojackpotComponent from '../../components/EurojackpotComponent.astro';
+---
+
+<Layout 
+  title="Cómo perder dinero rápidamente | Aprenda sobre errores financieros" 
+  description="Descubra cómo los juegos de lotería como EuroJackpot pueden desperdiciar su dinero. Haga un seguimiento de sus gastos y aprenda sobre decisiones financieras más inteligentes."
+  lang="es"
+>
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <header class="text-center mb-16">
+        <div class="inline-block animate-bounce mb-4">
+          <span class="text-3xl">💸</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-red-500" data-i18n="title">
+          Cómo perder dinero rápidamente
+        </h1>
+      </header>
+      
+      <!-- EuroJackpot Section -->
+      <section id="eurojackpot-container" class="mb-16">
+        <EurojackpotComponent />
+      </section>
+      
+      <!-- Money Wasted Graph Section -->
+      <section id="money-wasted-container" class="mb-16 bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+        <h2 class="text-2xl font-bold mb-4 text-red-300" data-i18n="moneyWasted.title">Rastreador de dinero desperdiciado</h2>
+        <p class="text-gray-300 mb-6" data-i18n="moneyWasted.description">Vea cuánto dinero ha desperdiciado en boletos de EuroJackpot a lo largo del tiempo.</p>
+        <div class="h-80 w-full">
+          <canvas id="money-wasted-chart"></canvas>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { i18n } from '../../i18n/i18n';
+  import Chart from 'chart.js/auto';
+  import { EurojackpotComponent } from '../../components/eurojackpot';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing i18n...');
+    
+    // Set language to Spanish
+    localStorage.setItem('language', 'es');
+    
+    // Initialize i18n first
+    i18n.init();
+    
+    // Then initialize the EuroJackpot component
+    try {
+      new EurojackpotComponent('eurojackpot-container');
+      console.log('EuroJackpot component initialized');
+    } catch (error) {
+      console.error('Failed to initialize EuroJackpot component:', error);
+    }
+  });
+</script>

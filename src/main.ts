@@ -1,7 +1,7 @@
-import './styles.css'
-import Chart from 'chart.js/auto'
-import { EurojackpotComponent } from './components/eurojackpot'
-import { i18n } from './i18n/i18n'
+import './styles.css';
+import Chart from 'chart.js/auto';
+import { EurojackpotComponent } from './components/eurojackpot';
+import { i18n } from './i18n/i18n';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM loaded, initializing i18n...');
@@ -19,11 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add structured data for SEO
   addStructuredData();
-})
+});
 
 // Add structured data for better SEO
-function addStructuredData() {
-  const structuredData = {
+function addStructuredData(): void {
+  interface StructuredData {
+    "@context": string;
+    "@type": string;
+    name: string;
+    description: string;
+    url: string;
+    potentialAction: {
+      "@type": string;
+      target: string;
+      "query-input": string;
+    };
+  }
+
+  const structuredData: StructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "How To Lose Money Fast",

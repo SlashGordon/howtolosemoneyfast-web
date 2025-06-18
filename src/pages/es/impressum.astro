@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Aviso Legal - Cómo perder dinero rápidamente" description="Información legal sobre el propietario del sitio web Cómo perder dinero rápidamente, un sitio web educativo sobre juegos de lotería." lang="es">
+  <div class="container mx-auto px-4 py-16">
+    <header class="mb-8">
+      <a href="/es" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Volver a la página principal</a>
+      <h1 class="text-4xl font-bold mb-4" data-i18n="impressum.title">Aviso Legal</h1>
+    </header>
+    
+    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+      <div data-i18n="impressum.content">
+        <h2 class="text-2xl font-bold mb-4">Información según § 5 TMG</h2>
+        <p class="mb-4">
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          Alemania
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Contacto</h3>
+        <p class="mb-4">
+          Teléfono: <span id="phone"></span><br>
+          Correo electrónico: <span id="email"></span>
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">Responsable del contenido según § 55 Abs. 2 RStV</h3>
+        <p class="mb-4">
+         <span id="name1_2"></span><br>
+         <span id="address1_2"></span><br>
+         <span id="address2_2"></span><br>
+         Alemania
+        </p>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  import { i18n } from '../../i18n/i18n';
+  import { initContactInfo } from '../../utils/contactEncryption';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set language to Spanish
+    localStorage.setItem('language', 'es');
+    i18n.init();
+    initContactInfo();
+  });
+</script>

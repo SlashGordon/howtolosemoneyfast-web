@@ -1,4 +1,4 @@
-import { MoneySymbol } from '../types';
+import type { MoneySymbol } from '../types/eurojackpot';
 
 /**
  * Creates a money rain animation effect on the page

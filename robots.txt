@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://howtolosemoneyfast.com/sitemap.xml

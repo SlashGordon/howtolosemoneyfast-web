@@ -1,4 +1,4 @@
-import { EurojackpotNumbers, EurojackpotResult } from '../types/eurojackpot';
+import { type EurojackpotNumbers, type EurojackpotResult } from '../types/eurojackpot';
 import { historicalDraws } from '../data/historicalEurojackpot';
 import { calculateProfitLoss, isWinner } from './profitLossCalculator';
 import { getNumbersFromCookie } from './cookieService';

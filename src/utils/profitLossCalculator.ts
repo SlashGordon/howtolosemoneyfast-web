@@ -1,4 +1,4 @@
-import { EurojackpotNumbers } from '../types/eurojackpot';
+import { type EurojackpotNumbers } from '../types/eurojackpot';
 
 /**
  * Calculate profit or loss for a Eurojackpot ticket

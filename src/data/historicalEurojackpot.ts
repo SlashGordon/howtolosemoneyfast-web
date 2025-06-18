@@ -1,4 +1,4 @@
-import { EurojackpotNumbers } from '../types/eurojackpot';
+import { type EurojackpotNumbers } from '../types/eurojackpot';
 
 // Historical EuroJackpot data
 // Auto-generated from https://github.com/SlashGordon/howtolosemoneyfast/blob/main/results.json

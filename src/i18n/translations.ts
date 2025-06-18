@@ -1,4 +1,12 @@
-export const translations = {
+export interface TranslationObject {
+  [key: string]: string | TranslationObject;
+}
+
+export interface Translations {
+  [locale: string]: TranslationObject;
+}
+
+export const translations: Translations = {
   en: {
     title: "How To Lose Money Fast",
     eurojackpot: {

@@ -1,4 +1,4 @@
-import { MoneyWastedData } from '../types/eurojackpot';
+import { type MoneyWastedData } from '../types/eurojackpot';
 import { getNumbersFromCookie } from './cookieService';
 
 const DEFAULT_TICKET_PRICE = 2.60; // Default price in euros

@@ -22,3 +22,5 @@ export interface MoneyWastedData {
   totalWasted: number;
   totalEtfValue: number;
 }
+
+export type MoneySymbol = '💸' | '💰' | '💵' | '💴' | '💶' | '💷' | '🪙';

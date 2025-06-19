@@ -1,6 +1,15 @@
 ---
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import ConsentManager from '../components/ConsentManager.astro';
+// Import Open Sans font
+import '@fontsource/open-sans/300.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+import '@fontsource/open-sans/300-italic.css';
+import '@fontsource/open-sans/400-italic.css';
+import '@fontsource/open-sans/600-italic.css';
+import '@fontsource/open-sans/700-italic.css';
 
 interface Props {
   title: string;
@@ -78,7 +87,7 @@ const alternateURLs = {
   </script>
   <ConsentManager />
 </head>
-<body class="bg-gray-900 text-white min-h-screen font-[Poppins]">
+<body class="bg-gray-900 text-white min-h-screen">
   <!-- Cookie Consent Banner -->
   <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 z-50 border-t border-gray-700 hidden">
     <div class="container mx-auto max-w-4xl">
@@ -86,8 +95,7 @@ const alternateURLs = {
         <div class="flex-1">
           <h3 class="font-bold text-lg mb-2" data-i18n="consent.title">Your Privacy Settings</h3>
           <p class="text-sm text-gray-300 mb-3" data-i18n="consent.description">
-            This website uses cookies and external services to enhance your experience.
-            We use Google Analytics for statistics and Google Fonts for display.
+            This website uses cookies and local storage to enhance your experience.
             You can choose whether you want to enable these services.
           </p>
           <div class="text-xs text-gray-400 mb-3">

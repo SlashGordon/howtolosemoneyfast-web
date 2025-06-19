@@ -1,54 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ImpressumComponent from '../components/ImpressumComponent.astro';
 ---
 
 <Layout title="Impressum - How To Lose Money Fast" description="Legal information about the website owner of How To Lose Money Fast, a financial education website about lottery games." lang="en">
-  <div class="container mx-auto px-4 py-16">
-    <header class="mb-8">
-      <a href="/" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Home</a>
-      <h1 class="text-4xl font-bold mb-4" data-i18n="impressum.title">Impressum</h1>
-    </header>
-    
-    <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
-      <div class="impressum-content">
-        <div data-i18n="impressum.content">Legal information about the website owner</div>
-        
-        <div class="mt-6">
-          <h2 class="text-2xl font-bold mb-4">Information according to § 5 TMG</h2>
-          <p class="mb-4">
-            <span id="name"></span><br>
-            <span id="address1"></span><br>
-            <span id="address2"></span><br>
-            Germany
-          </p>
-          
-          <h3 class="text-xl font-bold mb-2">Contact</h3>
-          <p class="mb-4">
-            Phone: <span id="phone"></span><br>
-            Email: <span id="email"></span>
-          </p>
-          
-          <h3 class="text-xl font-bold mb-2">Responsible for content according to § 55 Abs. 2 RStV</h3>
-          <p class="mb-4">
-           <span id="name1_2"></span><br>
-           <span id="address1_2"></span><br>
-           <span id="address2_2"></span><br>
-           Germany
-          </p>
-        </div>
-      </div>
-    </section>
-  </div>
+  <ImpressumComponent 
+    lang="en"
+    backLink="/"
+    backText="← Back to Home"
+  />
 </Layout>
-
-<script>
-  import { i18n } from '../i18n/i18n';
-  import { initContactInfo } from '../utils/contactEncryption';
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    // Set language to English
-    localStorage.setItem('language', 'en');
-    i18n.init();
-    initContactInfo();
-  });
-</script>

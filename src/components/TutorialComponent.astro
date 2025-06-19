@@ -1,0 +1,248 @@
+---
+import { Image } from 'astro:assets';
+import tutorialImage from '../assets/images/tutorial/step1.png';
+
+interface Props {
+  lang: string;
+  backLink: string;
+  backText: string;
+}
+
+const { lang, backLink, backText } = Astro.props;
+
+// Language-specific text
+const texts = {
+  en: {
+    title: "Tutorial",
+    subtitle: "Learn how to use our tools and understand the financial impact of lottery games.",
+    section1Title: "EuroJackpot Number Checker",
+    step1Title: "Step 1: Enter Your Numbers",
+    step1Text: "Enter 5 main numbers (1-50) and 2 Euro numbers (1-12) in the input fields. These are the numbers you typically play in EuroJackpot.",
+    imageAlt: "Enter your numbers",
+    step2Title: "Step 2: Set Ticket Price",
+    step2Text: "Enter the price you pay for a single ticket. The default is €2.60, but this may vary depending on your country.",
+    step3Title: "Step 3: Save & Check Numbers",
+    step3Text: "Click the \"Save & Check Numbers\" button to save your numbers and check them against historical draws.",
+    step4Title: "Step 4: Analyze Results",
+    step4Text: "Review the results to see if your numbers have ever won in past draws. The tool will show you:",
+    step4List: [
+      "Total draws checked",
+      "Winning draws (if any)",
+      "Win percentage",
+      "Total money spent on tickets",
+      "Total money won (if any)",
+      "Net profit/loss"
+    ],
+    step5Title: "Step 5: Save Multiple Number Sets",
+    step5Text: "You can save multiple sets of numbers to compare their performance. Each set is stored locally in your browser.",
+    section2Title: "Understanding the Financial Impact",
+    moneyWastedTitle: "Money Wasted Tracker",
+    moneyWastedText: "The Money Wasted Tracker shows you how much money you've spent on lottery tickets over time and compares it to potential investment returns.",
+    roiTitle: "Return on Investment (ROI)",
+    roiText: "The ROI calculation shows you the percentage of your money that you get back from playing the lottery. For most players, this is a negative number.",
+    etfTitle: "ETF Comparison",
+    etfText: "See how much money you could have made if you had invested your lottery ticket money in an ETF (Exchange-Traded Fund) instead.",
+    section3Title: "Tips for Using This Website",
+    bulkImportTitle: "Bulk Import",
+    bulkImportText: "Use the \"Bulk Import\" feature to add multiple sets of numbers at once. This is useful if you play the same numbers regularly.",
+    bulkImportExample: "Example format for bulk import:",
+    bulkImportExampleDesc: "Each array contains 7 numbers: the first 5 are main numbers (1-50) and the last 2 are Euro numbers (1-12).",
+    dateRangeTitle: "Date Range",
+    dateRangeText: "Use the date range filter to check your numbers against specific time periods. This is helpful if you only started playing recently.",
+    languageTitle: "Language Options",
+    languageText: "You can switch between English, German, and Spanish using the language selector in the top-right corner."
+  },
+  de: {
+    title: "Anleitung",
+    subtitle: "Lernen Sie, wie man unsere Tools verwendet und verstehen Sie die finanziellen Auswirkungen von Lotteriespielen.",
+    section1Title: "EuroJackpot Nummernprüfer",
+    step1Title: "Schritt 1: Geben Sie Ihre Zahlen ein",
+    step1Text: "Geben Sie 5 Hauptzahlen (1-50) und 2 Eurozahlen (1-12) in die Eingabefelder ein. Dies sind die Zahlen, die Sie typischerweise im EuroJackpot spielen.",
+    imageAlt: "Geben Sie Ihre Zahlen ein",
+    step2Title: "Schritt 2: Ticketpreis festlegen",
+    step2Text: "Geben Sie den Preis ein, den Sie für ein einzelnes Ticket bezahlen. Der Standardwert ist 2,60 €, kann aber je nach Land variieren.",
+    step3Title: "Schritt 3: Zahlen speichern & prüfen",
+    step3Text: "Klicken Sie auf die Schaltfläche \"Speichern & Prüfen\", um Ihre Zahlen zu speichern und sie mit historischen Ziehungen zu vergleichen.",
+    step4Title: "Schritt 4: Ergebnisse analysieren",
+    step4Text: "Überprüfen Sie die Ergebnisse, um zu sehen, ob Ihre Zahlen jemals in vergangenen Ziehungen gewonnen haben. Das Tool zeigt Ihnen:",
+    step4List: [
+      "Geprüfte Ziehungen insgesamt",
+      "Gewinnziehungen (falls vorhanden)",
+      "Gewinnrate",
+      "Gesamtausgaben für Tickets",
+      "Gesamtgewinne (falls vorhanden)",
+      "Nettogewinn/-verlust"
+    ],
+    step5Title: "Schritt 5: Mehrere Zahlensätze speichern",
+    step5Text: "Sie können mehrere Zahlensätze speichern, um ihre Leistung zu vergleichen. Jeder Satz wird lokal in Ihrem Browser gespeichert.",
+    section2Title: "Die finanziellen Auswirkungen verstehen",
+    moneyWastedTitle: "Geldverschwendungs-Tracker",
+    moneyWastedText: "Der Geldverschwendungs-Tracker zeigt Ihnen, wie viel Geld Sie im Laufe der Zeit für Lotterielose ausgegeben haben, und vergleicht es mit potenziellen Anlagerenditen.",
+    roiTitle: "Kapitalrendite (ROI)",
+    roiText: "Die ROI-Berechnung zeigt Ihnen den Prozentsatz Ihres Geldes, den Sie durch das Spielen der Lotterie zurückerhalten. Für die meisten Spieler ist dies eine negative Zahl.",
+    etfTitle: "ETF-Vergleich",
+    etfText: "Sehen Sie, wie viel Geld Sie hätten verdienen können, wenn Sie Ihr Lotterieticket-Geld stattdessen in einen ETF (Exchange-Traded Fund) investiert hätten.",
+    section3Title: "Tipps zur Nutzung dieser Website",
+    bulkImportTitle: "Massenimport",
+    bulkImportText: "Verwenden Sie die Funktion \"Massenimport\", um mehrere Zahlensätze auf einmal hinzuzufügen. Dies ist nützlich, wenn Sie regelmäßig die gleichen Zahlen spielen.",
+    bulkImportExample: "Beispielformat für Massenimport:",
+    bulkImportExampleDesc: "Jedes Array enthält 7 Zahlen: die ersten 5 sind Hauptzahlen (1-50) und die letzten 2 sind Eurozahlen (1-12).",
+    dateRangeTitle: "Datumsbereich",
+    dateRangeText: "Verwenden Sie den Datumsbereichsfilter, um Ihre Zahlen mit bestimmten Zeiträumen zu vergleichen. Dies ist hilfreich, wenn Sie erst kürzlich mit dem Spielen begonnen haben.",
+    languageTitle: "Sprachoptionen",
+    languageText: "Sie können zwischen Englisch, Deutsch und Spanisch über die Sprachauswahl in der oberen rechten Ecke wechseln."
+  },
+  es: {
+    title: "Tutorial",
+    subtitle: "Aprenda a usar nuestras herramientas y comprenda el impacto financiero de los juegos de lotería.",
+    section1Title: "Verificador de números de EuroJackpot",
+    step1Title: "Paso 1: Ingrese sus números",
+    step1Text: "Ingrese 5 números principales (1-50) y 2 números Euro (1-12) en los campos de entrada. Estos son los números que típicamente juega en EuroJackpot.",
+    imageAlt: "Ingrese sus números",
+    step2Title: "Paso 2: Establecer precio del boleto",
+    step2Text: "Ingrese el precio que paga por un solo boleto. El valor predeterminado es €2.60, pero puede variar según su país.",
+    step3Title: "Paso 3: Guardar y verificar números",
+    step3Text: "Haga clic en el botón \"Guardar y verificar\" para guardar sus números y compararlos con sorteos históricos.",
+    step4Title: "Paso 4: Analizar resultados",
+    step4Text: "Revise los resultados para ver si sus números han ganado alguna vez en sorteos anteriores. La herramienta le mostrará:",
+    step4List: [
+      "Total de sorteos verificados",
+      "Sorteos ganadores (si los hay)",
+      "Porcentaje de victorias",
+      "Dinero total gastado en boletos",
+      "Dinero total ganado (si lo hay)",
+      "Beneficio/pérdida neta"
+    ],
+    step5Title: "Paso 5: Guardar múltiples conjuntos de números",
+    step5Text: "Puede guardar múltiples conjuntos de números para comparar su rendimiento. Cada conjunto se almacena localmente en su navegador.",
+    section2Title: "Comprender el impacto financiero",
+    moneyWastedTitle: "Rastreador de dinero desperdiciado",
+    moneyWastedText: "El Rastreador de dinero desperdiciado le muestra cuánto dinero ha gastado en boletos de lotería a lo largo del tiempo y lo compara con los posibles rendimientos de inversión.",
+    roiTitle: "Retorno de inversión (ROI)",
+    roiText: "El cálculo del ROI le muestra el porcentaje de su dinero que recupera al jugar a la lotería. Para la mayoría de los jugadores, este es un número negativo.",
+    etfTitle: "Comparación con ETF",
+    etfText: "Vea cuánto dinero podría haber ganado si hubiera invertido su dinero de boletos de lotería en un ETF (Fondo Cotizado en Bolsa) en su lugar.",
+    section3Title: "Consejos para usar este sitio web",
+    bulkImportTitle: "Importación masiva",
+    bulkImportText: "Use la función \"Importación masiva\" para agregar varios conjuntos de números a la vez. Esto es útil si juega regularmente los mismos números.",
+    bulkImportExample: "Formato de ejemplo para importación masiva:",
+    bulkImportExampleDesc: "Cada array contiene 7 números: los primeros 5 son números principales (1-50) y los últimos 2 son números Euro (1-12).",
+    dateRangeTitle: "Rango de fechas",
+    dateRangeText: "Use el filtro de rango de fechas para verificar sus números contra períodos de tiempo específicos. Esto es útil si comenzó a jugar recientemente.",
+    languageTitle: "Opciones de idioma",
+    languageText: "Puede cambiar entre inglés, alemán y español usando el selector de idioma en la esquina superior derecha."
+  }
+};
+
+// Get the appropriate text based on language
+const t = texts[lang] || texts.en;
+---
+
+<div class="container mx-auto px-4 py-16">
+  <header class="mb-8">
+    <a href={backLink} class="text-blue-400 hover:text-blue-300 mb-4 inline-block">{backText}</a>
+    <h1 class="text-4xl font-bold mb-4">{t.title}</h1>
+    <p class="text-xl text-gray-300">{t.subtitle}</p>
+  </header>
+  
+  <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-4 text-red-300">{t.section1Title}</h2>
+    
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.step1Title}</h3>
+        <p class="mb-4">{t.step1Text}</p>
+        <Image 
+          src={tutorialImage} 
+          alt={t.imageAlt} 
+          width={800} 
+          height={450} 
+          class="rounded-lg border border-gray-600" 
+          quality="mid"
+          loading="eager"
+        />
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.step2Title}</h3>
+        <p class="mb-4">{t.step2Text}</p>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.step3Title}</h3>
+        <p class="mb-4">{t.step3Text}</p>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.step4Title}</h3>
+        <p class="mb-4">{t.step4Text}</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-300">
+          {t.step4List.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.step5Title}</h3>
+        <p class="mb-4">{t.step5Text}</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-4 text-red-300">{t.section2Title}</h2>
+    
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.moneyWastedTitle}</h3>
+        <p class="mb-4">{t.moneyWastedText}</p>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.roiTitle}</h3>
+        <p class="mb-4">{t.roiText}</p>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.etfTitle}</h3>
+        <p class="mb-4">{t.etfText}</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6">
+    <h2 class="text-2xl font-bold mb-4 text-red-300">{t.section3Title}</h2>
+    
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.bulkImportTitle}</h3>
+        <p class="mb-4">{t.bulkImportText}</p>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+          <p class="text-sm text-gray-400 mb-2">{t.bulkImportExample}</p>
+          <p class="text-sm text-gray-400 mb-2">{t.bulkImportExampleDesc}</p>
+          <pre class="text-xs text-green-400 overflow-x-auto">[
+    [3, 12, 26, 28, 47, 2, 11],
+    [8, 11, 18, 19, 47, 4, 6],
+    [1, 2, 29, 40, 49, 6, 7],
+    [14, 18, 34, 36, 42, 4, 6],
+    [2, 4, 12, 24, 48, 9, 12],
+    [7, 13, 29, 39, 43, 1, 7],
+    [9, 26, 34, 35, 42, 2, 10],
+    [14, 16, 17, 28, 45, 7, 12]
+]</pre>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.dateRangeTitle}</h3>
+        <p class="mb-4">{t.dateRangeText}</p>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold mb-2">{t.languageTitle}</h3>
+        <p class="mb-4">{t.languageText}</p>
+      </div>
+    </div>
+  </section>
+</div>

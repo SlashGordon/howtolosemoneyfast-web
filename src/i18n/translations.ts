@@ -69,7 +69,7 @@ export const translations: Translations = {
     },
     consent: {
       title: "Your Privacy Settings",
-      description: "This website uses cookies and external services to enhance your experience. We use Google Analytics for statistics and Google Fonts for display. You can choose whether you want to enable these services.",
+      description: "This website uses cookies and local storage to enhance your experience. You can choose whether you want to enable these services.",
       necessary: "Necessary only",
       acceptAll: "Accept all",
       acceptAllText: "By clicking \"Accept all\", you consent to the use of ALL cookies and trackers.",
@@ -146,7 +146,7 @@ export const translations: Translations = {
     },
     consent: {
       title: "Ihre Datenschutzeinstellungen",
-      description: "Diese Website verwendet Cookies und externe Dienste, um Ihr Nutzererlebnis zu verbessern. Wir verwenden Google Analytics für Statistiken und Google Fonts für die Darstellung. Sie können wählen, ob Sie diese Dienste aktivieren möchten.",
+      description: "Diese Website verwendet Cookies und lokalen Speicher, um Ihr Nutzererlebnis zu verbessern. Sie können wählen, ob Sie diese Dienste aktivieren möchten.",
       necessary: "Nur notwendige",
       acceptAll: "Alle akzeptieren",
       acceptAllText: "Durch Klicken auf \"Alle akzeptieren\" stimmen Sie der Verwendung ALLER Cookies und Tracker zu.",
@@ -223,7 +223,7 @@ export const translations: Translations = {
     },
     consent: {
       title: "Su configuración de privacidad",
-      description: "Este sitio web utiliza cookies y servicios externos para mejorar su experiencia. Utilizamos Google Analytics para estadísticas y Google Fonts para la visualización. Puede elegir si desea habilitar estos servicios.",
+      description: "Este sitio web utiliza cookies y almacenamiento local para mejorar su experiencia. Puede elegir si desea habilitar estos servicios.",
       necessary: "Solo necesarias",
       acceptAll: "Aceptar todas",
       acceptAllText: "Al hacer clic en \"Aceptar todas\", usted consiente el uso de TODAS las cookies y rastreadores.",

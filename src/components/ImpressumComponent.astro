@@ -1,0 +1,83 @@
+---
+interface Props {
+  lang: string;
+  backLink: string;
+  backText: string;
+}
+
+const { lang, backLink, backText } = Astro.props;
+---
+
+<div class="container mx-auto px-4 py-16">
+  <header class="mb-8">
+    <a href={backLink} class="text-blue-400 hover:text-blue-300 mb-4 inline-block">{backText}</a>
+    <h1 class="text-4xl font-bold mb-4" data-i18n="impressum.title">Impressum</h1>
+  </header>
+  
+  <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+    <div class="impressum-content">
+      <div data-i18n="impressum.content">Legal information about the website owner</div>
+      
+      <div class="mt-6">
+        <h2 class="text-2xl font-bold mb-4">
+          {lang === 'de' ? 'Angaben gemäß § 5 TMG' : 
+           lang === 'es' ? 'Información según § 5 TMG' : 
+           'Information according to § 5 TMG'}
+        </h2>
+        <p class="mb-4">
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          {lang === 'de' ? 'Deutschland' : 
+           lang === 'es' ? 'Alemania' : 
+           'Germany'}
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">
+          {lang === 'de' ? 'Kontakt' : 
+           lang === 'es' ? 'Contacto' : 
+           'Contact'}
+        </h3>
+        <p class="mb-4">
+          {lang === 'de' ? 'Telefon: ' : 
+           lang === 'es' ? 'Teléfono: ' : 
+           'Phone: '}<span id="phone"></span><br>
+          {lang === 'de' ? 'E-Mail: ' : 
+           lang === 'es' ? 'Correo electrónico: ' : 
+           'Email: '}<span id="email"></span>
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">
+          {lang === 'de' ? 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV' : 
+           lang === 'es' ? 'Responsable del contenido según § 55 Abs. 2 RStV' : 
+           'Responsible for content according to § 55 Abs. 2 RStV'}
+        </h3>
+        <p class="mb-4">
+         <span id="name1_2"></span><br>
+         <span id="address1_2"></span><br>
+         <span id="address2_2"></span><br>
+         {lang === 'de' ? 'Deutschland' : 
+          lang === 'es' ? 'Alemania' : 
+          'Germany'}
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script define:vars={{ lang }} is:inline>
+  // We'll use the client script to handle initialization
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set language based on the prop
+    localStorage.setItem('language', lang);
+  });
+</script>
+
+<script>
+  import { i18n } from '../i18n/i18n';
+  import { initContactInfo } from '../utils/contactEncryption';
+  
+  // Initialize i18n and contact info
+  i18n.init();
+  initContactInfo();
+</script>

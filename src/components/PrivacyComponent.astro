@@ -1,0 +1,220 @@
+---
+interface Props {
+  lang: string;
+  backLink: string;
+  backText: string;
+}
+
+const { lang, backLink, backText } = Astro.props;
+
+// Language-specific text
+const texts = {
+  en: {
+    dataProtection: "Data Protection at a Glance",
+    generalInfo: "General Information",
+    generalInfoText: "The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can be used to identify you personally. For detailed information on data protection, please refer to our privacy policy listed below.",
+    dataCollection: "Data Collection on This Website",
+    whoResponsible: "Who is responsible for data collection on this website?",
+    whoResponsibleText: "Data processing on this website is carried out by the website operator. You can find the contact details in the Impressum of this website.",
+    howCollect: "How Do We Collect Your Data?",
+    howCollectText: "Your data is collected when you provide it to us. This can be data that you enter in a contact form or through your saved preferences. Other data is collected automatically by our IT systems when you visit the website. This is primarily technical data (e.g., internet browser, operating system, or time of page view). This data is collected automatically as soon as you enter our website.",
+    whatUse: "What Do We Use Your Data For?",
+    whatUseText: "Part of the data is collected to ensure error-free provision of the website. Other data may be used to analyze your user behavior.",
+    whatRights: "What Rights Do You Have Regarding Your Data?",
+    whatRightsText: "You have the right to receive information about the origin, recipient, and purpose of your stored personal data free of charge at any time. You also have the right to request the correction, blocking, or deletion of this data. You can contact us at any time at the address given in the Impressum if you have further questions about data protection. You also have the right to lodge a complaint with the competent supervisory authority.",
+    generalInfoMandatory: "General Information and Mandatory Information",
+    dataProtectionSection: "Data Protection",
+    dataProtectionText: "The operators of these pages take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.",
+    responsibleParty: "Information About the Responsible Party",
+    responsiblePartyText: "The responsible party for data processing on this website is:",
+    country: "Germany",
+    email: "Email:",
+    phone: "Phone:",
+    dataCollectionWebsite: "Data Collection on Our Website",
+    cookies: "Cookies",
+    cookiesText: "This website uses cookies to store your preferences and settings. These are small text files that are stored on your computer. These cookies do not harm your computer and do not contain viruses. Cookies serve to make our offering more user-friendly, effective, and secure.",
+    localStorage: "Local Storage",
+    localStorageText: "This website uses local storage to save your EuroJackpot numbers and preferences. This data is stored locally on your device and is not transmitted to our servers.",
+    github: "GitHub Pages",
+    githubText: "This website is hosted on GitHub Pages, a service provided by GitHub, Inc. GitHub Pages may collect user information, including IP addresses, to comply with legal obligations, maintain security and integrity of the website, and monitor usage patterns. For more information about how GitHub handles your data, please refer to the",
+    githubPrivacy: "GitHub Privacy Statement",
+    cloudflare: "Cloudflare",
+    cloudflareText1: "This website uses services provided by Cloudflare, Inc. to optimize delivery speed, improve security, and protect against DDoS attacks. Cloudflare acts as a content delivery network (CDN) and may process your IP address and other technical information when you visit our website.",
+    cloudflareText2: "Cloudflare may store cookies on your device to optimize performance. These cookies do not contain any personally identifiable information.",
+    cloudflareText3: "We have entered into a data processing agreement with Cloudflare that complies with the requirements of Art. 28 GDPR. Cloudflare may transfer data to the USA and other countries outside the EU. Cloudflare guarantees that it will comply with European data protection standards through standard contractual clauses.",
+    cloudflareText4: "For more information about Cloudflare's privacy practices, please visit their",
+    privacyPolicy: "Privacy Policy"
+  },
+  de: {
+    dataProtection: "Datenschutz auf einen Blick",
+    generalInfo: "Allgemeine Hinweise",
+    generalInfoText: "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.",
+    dataCollection: "Datenerfassung auf dieser Website",
+    whoResponsible: "Wer ist verantwortlich für die Datenerfassung auf dieser Website?",
+    whoResponsibleText: "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.",
+    howCollect: "Wie erfassen wir Ihre Daten?",
+    howCollectText: "Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben oder durch Ihre gespeicherten Präferenzen. Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.",
+    whatUse: "Wofür nutzen wir Ihre Daten?",
+    whatUseText: "Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.",
+    whatRights: "Welche Rechte haben Sie bezüglich Ihrer Daten?",
+    whatRightsText: "Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.",
+    generalInfoMandatory: "Allgemeine Hinweise und Pflichtinformationen",
+    dataProtectionSection: "Datenschutz",
+    dataProtectionText: "Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.",
+    responsibleParty: "Hinweis zur verantwortlichen Stelle",
+    responsiblePartyText: "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
+    country: "Deutschland",
+    email: "E-Mail:",
+    phone: "Telefon:",
+    dataCollectionWebsite: "Datenerfassung auf unserer Website",
+    cookies: "Cookies",
+    cookiesText: "Diese Website verwendet Cookies, um Ihre Präferenzen und Einstellungen zu speichern. Dabei handelt es sich um kleine Textdateien, die auf Ihrem Computer gespeichert werden. Diese Cookies schaden Ihrem Computer nicht und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.",
+    localStorage: "Local Storage",
+    localStorageText: "Diese Website verwendet Local Storage, um Ihre EuroJackpot-Zahlen und Präferenzen zu speichern. Diese Daten werden lokal auf Ihrem Gerät gespeichert und nicht an unsere Server übertragen.",
+    github: "GitHub Pages",
+    githubText: "Diese Website wird auf GitHub Pages gehostet, einem Dienst der GitHub, Inc. GitHub Pages kann Benutzerinformationen, einschließlich IP-Adressen, sammeln, um gesetzlichen Verpflichtungen nachzukommen, die Sicherheit und Integrität der Website zu gewährleisten und Nutzungsmuster zu überwachen. Weitere Informationen darüber, wie GitHub mit Ihren Daten umgeht, finden Sie in der",
+    githubPrivacy: "GitHub Datenschutzerklärung",
+    cloudflare: "Cloudflare",
+    cloudflareText1: "Diese Website nutzt Dienste von Cloudflare, Inc., um die Ladegeschwindigkeit zu optimieren, die Sicherheit zu verbessern und Schutz vor DDoS-Angriffen zu bieten. Cloudflare fungiert als Content Delivery Network (CDN) und kann Ihre IP-Adresse und andere technische Informationen verarbeiten, wenn Sie unsere Website besuchen.",
+    cloudflareText2: "Cloudflare kann Cookies auf Ihrem Gerät speichern, um die Leistung zu optimieren. Diese Cookies enthalten keine personenbezogenen Daten.",
+    cloudflareText3: "Wir haben mit Cloudflare einen Auftragsverarbeitungsvertrag abgeschlossen, der den Anforderungen des Art. 28 DSGVO entspricht. Cloudflare kann Daten in die USA und andere Länder außerhalb der EU übertragen. Cloudflare garantiert durch Standardvertragsklauseln die Einhaltung des europäischen Datenschutzniveaus.",
+    cloudflareText4: "Weitere Informationen zu den Datenschutzpraktiken von Cloudflare finden Sie in deren",
+    privacyPolicy: "Datenschutzerklärung"
+  },
+  es: {
+    dataProtection: "Protección de Datos de un Vistazo",
+    generalInfo: "Información General",
+    generalInfoText: "La siguiente información proporciona una visión general simple de lo que sucede con sus datos personales cuando visita este sitio web. Los datos personales son todos aquellos datos que pueden utilizarse para identificarle personalmente. Para obtener información detallada sobre la protección de datos, consulte nuestra política de privacidad que figura a continuación.",
+    dataCollection: "Recopilación de Datos en Este Sitio Web",
+    whoResponsible: "¿Quién es responsable de la recopilación de datos en este sitio web?",
+    whoResponsibleText: "El procesamiento de datos en este sitio web lo realiza el operador del sitio web. Puede encontrar los datos de contacto en el Aviso Legal de este sitio web.",
+    howCollect: "¿Cómo Recopilamos Sus Datos?",
+    howCollectText: "Sus datos se recopilan cuando usted nos los proporciona. Estos pueden ser datos que introduce en un formulario de contacto o a través de sus preferencias guardadas. Otros datos se recopilan automáticamente por nuestros sistemas de TI cuando visita el sitio web. Estos son principalmente datos técnicos (por ejemplo, navegador de Internet, sistema operativo o hora de visualización de la página). Estos datos se recopilan automáticamente tan pronto como ingresa a nuestro sitio web.",
+    whatUse: "¿Para Qué Utilizamos Sus Datos?",
+    whatUseText: "Parte de los datos se recopilan para garantizar la provisión sin errores del sitio web. Otros datos pueden utilizarse para analizar su comportamiento como usuario.",
+    whatRights: "¿Qué Derechos Tiene Respecto a Sus Datos?",
+    whatRightsText: "Tiene derecho a recibir información gratuita sobre el origen, destinatario y finalidad de sus datos personales almacenados en cualquier momento. También tiene derecho a solicitar la corrección, bloqueo o eliminación de estos datos. Puede contactarnos en cualquier momento en la dirección indicada en el Aviso Legal si tiene más preguntas sobre la protección de datos. También tiene derecho a presentar una queja ante la autoridad supervisora competente.",
+    generalInfoMandatory: "Información General y Obligatoria",
+    dataProtectionSection: "Protección de Datos",
+    dataProtectionText: "Los operadores de estas páginas se toman muy en serio la protección de sus datos personales. Tratamos sus datos personales de forma confidencial y de acuerdo con las disposiciones legales de protección de datos y esta política de privacidad.",
+    responsibleParty: "Información Sobre la Parte Responsable",
+    responsiblePartyText: "La parte responsable del procesamiento de datos en este sitio web es:",
+    country: "Alemania",
+    email: "Correo electrónico:",
+    phone: "Teléfono:",
+    dataCollectionWebsite: "Recopilación de Datos en Nuestro Sitio Web",
+    cookies: "Cookies",
+    cookiesText: "Este sitio web utiliza cookies para almacenar sus preferencias y configuraciones. Estas son pequeños archivos de texto que se almacenan en su computadora. Estas cookies no dañan su computadora y no contienen virus. Las cookies sirven para hacer que nuestra oferta sea más fácil de usar, efectiva y segura.",
+    localStorage: "Almacenamiento Local",
+    localStorageText: "Este sitio web utiliza almacenamiento local para guardar sus números de EuroJackpot y preferencias. Estos datos se almacenan localmente en su dispositivo y no se transmiten a nuestros servidores.",
+    github: "GitHub Pages",
+    githubText: "Este sitio web está alojado en GitHub Pages, un servicio proporcionado por GitHub, Inc. GitHub Pages puede recopilar información del usuario, incluidas direcciones IP, para cumplir con obligaciones legales, mantener la seguridad e integridad del sitio web y monitorear patrones de uso. Para obtener más información sobre cómo GitHub maneja sus datos, consulte la",
+    githubPrivacy: "Declaración de Privacidad de GitHub",
+    cloudflare: "Cloudflare",
+    cloudflareText1: "Este sitio web utiliza servicios proporcionados por Cloudflare, Inc. para optimizar la velocidad de entrega, mejorar la seguridad y proteger contra ataques DDoS. Cloudflare actúa como una red de distribución de contenido (CDN) y puede procesar su dirección IP y otra información técnica cuando visita nuestro sitio web.",
+    cloudflareText2: "Cloudflare puede almacenar cookies en su dispositivo para optimizar el rendimiento. Estas cookies no contienen información de identificación personal.",
+    cloudflareText3: "Hemos celebrado un acuerdo de procesamiento de datos con Cloudflare que cumple con los requisitos del Art. 28 del RGPD. Cloudflare puede transferir datos a los EE. UU. y otros países fuera de la UE. Cloudflare garantiza que cumplirá con los estándares europeos de protección de datos a través de cláusulas contractuales estándar.",
+    cloudflareText4: "Para obtener más información sobre las prácticas de privacidad de Cloudflare, visite su",
+    privacyPolicy: "Política de Privacidad"
+  }
+};
+
+// Get the appropriate text based on language
+const t = texts[lang] || texts.en;
+---
+
+<div class="container mx-auto px-4 py-16">
+  <header class="mb-8">
+    <a href={backLink} class="text-blue-400 hover:text-blue-300 mb-4 inline-block">{backText}</a>
+    <h1 class="text-4xl font-bold mb-4" data-i18n="privacy.title">Privacy Policy</h1>
+  </header>
+  
+  <section class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 p-6 mb-8">
+    <div class="privacy-content">
+      <div data-i18n="privacy.content">Information about data protection and privacy</div>
+      
+      <div class="mt-6">
+        <h2 class="text-2xl font-bold mb-4">1. {t.dataProtection}</h2>
+        <h3 class="text-xl font-bold mb-2">{t.generalInfo}</h3>
+        <p class="mb-4">{t.generalInfoText}</p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.dataCollection}</h3>
+        <p class="mb-4">
+          <strong>{t.whoResponsible}</strong><br>
+          {t.whoResponsibleText}
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.howCollect}</h3>
+        <p class="mb-4">{t.howCollectText}</p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.whatUse}</h3>
+        <p class="mb-4">{t.whatUseText}</p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.whatRights}</h3>
+        <p class="mb-4">{t.whatRightsText}</p>
+        
+        <h2 class="text-2xl font-bold mb-4 mt-8">2. {t.generalInfoMandatory}</h2>
+        <h3 class="text-xl font-bold mb-2">{t.dataProtectionSection}</h3>
+        <p class="mb-4">{t.dataProtectionText}</p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.responsibleParty}</h3>
+        <p class="mb-4">
+          {t.responsiblePartyText}<br>
+          <span id="name"></span><br>
+          <span id="address1"></span><br>
+          <span id="address2"></span><br>
+          {t.country}<br>
+          <br>
+          {t.email} <span id="email"></span><br>
+          {t.phone} <span id="phone"></span>
+        </p>
+        
+        <h2 class="text-2xl font-bold mb-4 mt-8">3. {t.dataCollectionWebsite}</h2>
+        <h3 class="text-xl font-bold mb-2">{t.cookies}</h3>
+        <p class="mb-4">{t.cookiesText}</p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.localStorage}</h3>
+        <p class="mb-4">{t.localStorageText}</p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.github}</h3>
+        <p class="mb-4">
+          {t.githubText}
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" 
+            class="text-blue-400 hover:text-blue-300" target="_blank" rel="noopener noreferrer">{t.githubPrivacy}</a>.
+        </p>
+        
+        <h3 class="text-xl font-bold mb-2">{t.cloudflare}</h3>
+        <p class="mb-4">
+          {t.cloudflareText1}
+          <br><br>
+          {t.cloudflareText2}
+          <br><br>
+          {t.cloudflareText3}
+          <br><br>
+          {t.cloudflareText4}
+          <a href={lang === 'de' ? "https://www.cloudflare.com/de-de/privacypolicy/" : 
+                   lang === 'es' ? "https://www.cloudflare.com/es-es/privacypolicy/" : 
+                   "https://www.cloudflare.com/privacypolicy/"} 
+            class="text-blue-400 hover:text-blue-300" target="_blank" rel="noopener noreferrer">{t.privacyPolicy}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script define:vars={{ lang }} is:inline>
+  // We'll use the client script to handle initialization
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set language based on the prop
+    localStorage.setItem('language', lang);
+  });
+</script>
+
+<script>
+  import { i18n } from '../i18n/i18n';
+  import { initContactInfo } from '../utils/contactEncryption';
+  
+  // Initialize i18n and contact info
+  i18n.init();
+  initContactInfo();
+</script>

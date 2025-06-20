@@ -82,6 +82,8 @@ export const translations: Translations = {
       impressum: "Impressum",
       privacy: "Privacy Policy"
     },
+    disclaimer: "This website is for educational purposes only. Learn about the financial impact of lottery games. This is not financial advice.",
+    keywords: "lottery analysis, money management, financial education, EuroJackpot statistics",
     languageSelector: "Language"
   },
   de: {
@@ -159,6 +161,8 @@ export const translations: Translations = {
       impressum: "Impressum",
       privacy: "Datenschutzerklärung"
     },
+    disclaimer: "Diese Website dient nur zu Bildungszwecken. Erfahren Sie mehr über die finanziellen Auswirkungen von Lotteriespielen. Dies ist keine Finanzberatung.",
+    keywords: "Lotterie-Analyse, Geldverwaltung, Finanzbildung, EuroJackpot-Statistiken",
     languageSelector: "Sprache"
   },
   es: {
@@ -236,6 +240,8 @@ export const translations: Translations = {
       impressum: "Aviso Legal",
       privacy: "Política de Privacidad"
     },
+    disclaimer: "Este sitio web es solo para fines educativos. Aprenda sobre el impacto financiero de los juegos de lotería. Esto no es asesoramiento financiero.",
+    keywords: "análisis de lotería, gestión de dinero, educación financiera, estadísticas de EuroJackpot",
     languageSelector: "Idioma"
   }
 }

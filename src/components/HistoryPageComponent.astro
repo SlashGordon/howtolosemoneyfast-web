@@ -64,6 +64,7 @@ const downloadFilename = lang === 'en' ? 'eurojackpot-history.json' :
   data-euro-numbers-sum={translations.euroNumbersSum}
   data-copied-success={translations.copiedSuccess}
   data-copy-error={translations.copyError}
+  data-most-common-euro-pairs={translations.mostCommonEuroPairs}
   data-download-filename={downloadFilename}>
   <header class="mb-8">
     <a href={homeLink} class="text-blue-400 hover:text-blue-300 mb-4 inline-block">← {translations.backToHome}</a>
@@ -315,7 +316,8 @@ const downloadFilename = lang === 'en' ? 'eurojackpot-history.json' :
       mainNumbersSum: historyContainer.getAttribute('data-main-numbers-sum') || 'Main Numbers Sum',
       euroNumbersSum: historyContainer.getAttribute('data-euro-numbers-sum') || 'Euro Numbers Sum',
       copiedSuccess: historyContainer.getAttribute('data-copied-success') || 'JSON data copied to clipboard!',
-      copyError: historyContainer.getAttribute('data-copy-error') || 'Failed to copy to clipboard'
+      copyError: historyContainer.getAttribute('data-copy-error') || 'Failed to copy to clipboard',
+      mostCommonEuroPairs: historyContainer.getAttribute('data-most-common-euro-pairs') || 'Most Common Euro Pairs'
     };
     
     const downloadFilename = historyContainer.getAttribute('data-download-filename') || 'eurojackpot-history.json';

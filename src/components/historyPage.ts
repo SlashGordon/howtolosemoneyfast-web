@@ -11,6 +11,7 @@ interface Translations {
   pair?: string;
   triplet?: string;
   occurrences?: string;
+  mostCommonEuroPairs?: string;
 }
 
 interface NumberFrequency {

@@ -84,6 +84,33 @@ const alternateURLs = {
     script.type = 'application/ld+json';
     script.text = JSON.stringify(structuredData);
     document.head.appendChild(script);
+    
+    // Handle navigation language selector
+    document.addEventListener('DOMContentLoaded', function() {
+      const navSelector = document.getElementById('nav-language-selector');
+      if (navSelector) {
+        // Set initial selection based on current URL
+        const currentPath = window.location.pathname;
+        const currentLang = currentPath.startsWith('/de') ? 'de' : 
+                           currentPath.startsWith('/es') ? 'es' : 'en';
+        navSelector.value = currentLang;
+        
+        navSelector.addEventListener('change', function(e) {
+          const selectedLang = e.target.value;
+          
+          let newPath;
+          if (selectedLang === 'en') {
+            newPath = currentPath.replace(/^\/(de|es)(\/|$)/, '/');
+          } else {
+            const pathWithoutLang = currentPath.replace(/^\/(de|es)(\/|$)/, '/');
+            newPath = `/${selectedLang}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+          }
+          
+          localStorage.setItem('language', selectedLang);
+          window.location.href = newPath;
+        });
+      }
+    });
   </script>
   <ConsentManager />
 </head>
@@ -118,17 +145,21 @@ const alternateURLs = {
   <!-- Top Navigation -->
   <nav class="bg-gray-800 border-b border-gray-700">
     <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center space-x-8">
-          <a href={lang === 'en' ? '/' : `/${lang}`} class="text-xl font-bold text-white hover:text-blue-300">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-0 sm:h-16">
+        <div class="flex items-center justify-between">
+          <a href={lang === 'en' ? '/' : `/${lang}`} class="text-lg sm:text-xl font-bold text-white hover:text-blue-300">
             How To Lose Money Fast
           </a>
-          <div class="hidden md:flex space-x-6">
-            <a href={lang === 'en' ? '/tutorial' : `/${lang}/tutorial`} class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-i18n="footer.tutorial">Tutorial</a>
-            <a href={lang === 'en' ? '/history' : `/${lang}/history`} class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-i18n="footer.history">Stats & History</a>
+          <div class="flex items-center space-x-4 sm:space-x-6">
+            <a href={lang === 'en' ? '/tutorial' : `/${lang}/tutorial`} class="text-gray-300 hover:text-white px-2 py-1 sm:px-3 sm:py-2 rounded-md text-sm font-medium" data-i18n="footer.tutorial">Tutorial</a>
+            <a href={lang === 'en' ? '/history' : `/${lang}/history`} class="text-gray-300 hover:text-white px-2 py-1 sm:px-3 sm:py-2 rounded-md text-sm font-medium" data-i18n="footer.history">Stats & History</a>
+            <select id="nav-language-selector" class="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1 text-sm">
+              <option value="en">🇺🇸 EN</option>
+              <option value="de">🇩🇪 DE</option>
+              <option value="es">🇪🇸 ES</option>
+            </select>
           </div>
         </div>
-        <LanguageSwitcher />
       </div>
     </div>
   </nav>

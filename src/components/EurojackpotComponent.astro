@@ -109,3 +109,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { EurojackpotComponent } from './eurojackpot';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      new EurojackpotComponent('eurojackpot-container');
+    } catch (error) {
+      console.error('Failed to initialize EuroJackpot component:', error);
+    }
+  });
+</script>

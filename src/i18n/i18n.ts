@@ -40,20 +40,28 @@ class I18nService {
   bindLanguageSelector(): void {
     console.log('Binding language selector...');
     
-    // Try to find the language selector
-    const selector = document.getElementById('language-selector') as HTMLSelectElement | null;
+    // Try to find the navigation language selector first
+    let selector = document.getElementById('nav-language-selector') as HTMLSelectElement | null;
+    
+    // If not found, try the old selector ID
+    if (!selector) {
+      selector = document.getElementById('language-selector') as HTMLSelectElement | null;
+    }
     
     if (!selector) {
       console.warn('Language selector not found, will retry');
       
       // If not found, retry after a delay
       setTimeout(() => {
-        const retrySelector = document.getElementById('language-selector') as HTMLSelectElement | null;
+        let retrySelector = document.getElementById('nav-language-selector') as HTMLSelectElement | null;
+        if (!retrySelector) {
+          retrySelector = document.getElementById('language-selector') as HTMLSelectElement | null;
+        }
         if (retrySelector) {
           console.log('Language selector found on retry');
           this._bindSelectorEvents(retrySelector);
         } else {
-          console.error('Language selector still not found after retry');
+          console.warn('Language selector still not found after retry');
         }
       }, 500);
       return;

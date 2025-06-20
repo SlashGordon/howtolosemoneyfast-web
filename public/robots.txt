@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /404
 
-# Sitemap locations
 Sitemap: https://howtolosemoneyfast.com/sitemap.xml
-Sitemap: https://howtolosemoneyfast.com/sitemap-custom.xml

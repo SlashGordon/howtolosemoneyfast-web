@@ -42,14 +42,19 @@ const alternateURLs = {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
-  <meta name="keywords" content="money wasting, lottery, EuroJackpot, financial education, money management">
+  <meta name="keywords" content="lottery analysis, EuroJackpot statistics, money management, financial education, gambling losses, lottery odds, investment comparison">
+  <meta name="author" content="How To Lose Money Fast">
+  <meta name="robots" content="index, follow">
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
   <meta property="og:url" content={canonicalURL}>
+  <meta property="og:site_name" content="How To Lose Money Fast">
+  <meta property="og:locale" content={lang === 'de' ? 'de_DE' : lang === 'es' ? 'es_ES' : 'en_US'}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
+  <meta name="twitter:site" content="@howtolosemoneyfast">
   
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -69,15 +74,22 @@ const alternateURLs = {
     // Add structured data for better SEO
     const structuredData = {
       "@context": "https://schema.org",
-      "@type": "WebSite",
+      "@type": "WebApplication",
       "name": "How To Lose Money Fast",
-      "description": "Learn about financial mistakes and track lottery spending with our EuroJackpot simulator",
+      "description": "Educational tool to analyze lottery spending and understand financial impact of gambling",
       "url": window.location.origin,
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": `${window.location.origin}/search?q={search_term_string}`,
-        "query-input": "required name=search_term_string"
-      }
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "How To Lose Money Fast"
+      },
+      "inLanguage": ["en", "de", "es"]
     };
 
     const script = document.createElement('script');

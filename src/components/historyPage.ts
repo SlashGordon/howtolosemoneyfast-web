@@ -8,6 +8,9 @@ interface Translations {
   euroNumbersSum: string;
   copiedSuccess: string;
   copyError: string;
+  pair?: string;
+  triplet?: string;
+  occurrences?: string;
 }
 
 interface NumberFrequency {
@@ -30,6 +33,7 @@ export function initializeHistoryPage(
   // Initialize charts and statistics
   initializeCharts(translations, historicalDraws);
   displayHotColdNumbers(historicalDraws);
+  displayPairAnalysis(historicalDraws);
 }
 
 
@@ -408,6 +412,109 @@ function displayNumbersInContainer(
         <span class="text-xs text-gray-300 mt-1">${item.frequency}x</span>
       `;
       container.appendChild(numberBall);
+    });
+  }
+}
+
+function displayPairAnalysis(historicalDraws: EurojackpotNumbers[]): void {
+  // Calculate pair frequencies
+  const pairFrequency: { [key: string]: number } = {};
+  const tripletFrequency: { [key: string]: number } = {};
+  const euroPairFrequency: { [key: string]: number } = {};
+  
+  historicalDraws.forEach(draw => {
+    const mainNumbers = draw.mainNumbers.sort((a, b) => a - b);
+    const euroNumbers = draw.euroNumbers.sort((a, b) => a - b);
+    
+    // Generate all pairs from main numbers
+    for (let i = 0; i < mainNumbers.length - 1; i++) {
+      for (let j = i + 1; j < mainNumbers.length; j++) {
+        const pair = `${mainNumbers[i]}-${mainNumbers[j]}`;
+        pairFrequency[pair] = (pairFrequency[pair] || 0) + 1;
+      }
+    }
+    
+    // Generate all triplets from main numbers
+    for (let i = 0; i < mainNumbers.length - 2; i++) {
+      for (let j = i + 1; j < mainNumbers.length - 1; j++) {
+        for (let k = j + 1; k < mainNumbers.length; k++) {
+          const triplet = `${mainNumbers[i]}-${mainNumbers[j]}-${mainNumbers[k]}`;
+          tripletFrequency[triplet] = (tripletFrequency[triplet] || 0) + 1;
+        }
+      }
+    }
+    
+    // Generate Euro number pair (only one pair possible with 2 numbers)
+    if (euroNumbers.length === 2) {
+      const euroPair = `${euroNumbers[0]}-${euroNumbers[1]}`;
+      euroPairFrequency[euroPair] = (euroPairFrequency[euroPair] || 0) + 1;
+    }
+  });
+  
+  // Get top results
+  const topPairs = Object.entries(pairFrequency)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 10);
+    
+  const topTriplets = Object.entries(tripletFrequency)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 10);
+    
+  const topEuroPairs = Object.entries(euroPairFrequency)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 10);
+  
+  displayPairsInContainer('commonPairs', topPairs);
+  displayPairsInContainer('commonTriplets', topTriplets);
+  displayEuroPairsInContainer('commonEuroPairs', topEuroPairs);
+}
+
+function displayPairsInContainer(
+  containerId: string,
+  pairs: [string, number][]
+): void {
+  const container = document.getElementById(containerId);
+  if (container) {
+    pairs.forEach(([combination, frequency]) => {
+      const pairElement = document.createElement('div');
+      pairElement.className = 'flex justify-between items-center bg-gray-700 px-3 py-2 rounded';
+      
+      const numbers = combination.split('-').map(num => parseInt(num));
+      const numbersHtml = numbers.map(num => 
+        `<span class="inline-block w-6 h-6 rounded-full bg-orange-500 text-white text-center text-xs leading-6">${num}</span>`
+      ).join(' ');
+      
+      pairElement.innerHTML = `
+        <div class="flex items-center space-x-1">${numbersHtml}</div>
+        <span class="text-orange-300 font-semibold">${frequency}x</span>
+      `;
+      
+      container.appendChild(pairElement);
+    });
+  }
+}
+
+function displayEuroPairsInContainer(
+  containerId: string,
+  pairs: [string, number][]
+): void {
+  const container = document.getElementById(containerId);
+  if (container) {
+    pairs.forEach(([combination, frequency]) => {
+      const pairElement = document.createElement('div');
+      pairElement.className = 'flex justify-between items-center bg-gray-700 px-3 py-2 rounded';
+      
+      const numbers = combination.split('-').map(num => parseInt(num));
+      const numbersHtml = numbers.map(num => 
+        `<span class="inline-block w-6 h-6 rounded-full bg-yellow-500 text-white text-center text-xs leading-6">${num}</span>`
+      ).join(' ');
+      
+      pairElement.innerHTML = `
+        <div class="flex items-center space-x-1">${numbersHtml}</div>
+        <span class="text-yellow-300 font-semibold">${frequency}x</span>
+      `;
+      
+      container.appendChild(pairElement);
     });
   }
 }

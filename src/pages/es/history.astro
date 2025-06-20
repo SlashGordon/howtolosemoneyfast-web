@@ -26,10 +26,17 @@ const translations = {
   euroNumbersSum: "Suma de números Euro",
   number: "Número",
   copiedSuccess: "¡Datos JSON copiados al portapapeles!",
-  copyError: "Error al copiar al portapapeles. Por favor, inténtelo de nuevo."
+  copyError: "Error al copiar al portapapeles. Por favor, inténtelo de nuevo.",
+  pairAnalysis: "Análisis de Pares",
+  mostCommonPairs: "Pares Más Comunes",
+  mostCommonTriplets: "Ternas Más Comunes",
+  mostCommonEuroPairs: "Pares Euro Más Comunes",
+  pair: "Par",
+  triplet: "Terna",
+  occurrences: "Ocurrencias"
 };
 ---
 
-<Layout title="Historial de EuroJackpot - Cómo perder dinero rápidamente" description="Vea el historial completo de sorteos de EuroJackpot y descargue los datos en formato JSON." lang="es">
+<Layout title={`Datos Históricos EuroJackpot & Estadísticas | Historial Completo Sorteos 2012-${new Date().getFullYear()}`} description={`Acceso a datos completos de EuroJackpot 2012-${new Date().getFullYear()}. Estadísticas de sorteos, frecuencias de números, números calientes/fríos y descarga JSON para análisis.`} lang="es">
   <HistoryPageComponent lang="es" translations={translations} />
 </Layout>

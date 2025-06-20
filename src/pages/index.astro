@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import EurojackpotComponent from '../components/EurojackpotComponent.astro';
 ---
 
-<Layout title="How To Lose Money Fast | Learn About Financial Mistakes" lang="en">
+<Layout title="EuroJackpot Lottery Analysis Tool | Track Your Spending & Losses" description="Analyze your EuroJackpot lottery spending with our free calculator. Track losses, compare with ETF investments, and understand the real cost of lottery tickets." lang="en">
   <!-- Hero Section -->
   <div class="relative overflow-hidden">
     <div class="absolute inset-0 bg-black opacity-20"></div>
@@ -37,21 +37,9 @@ import EurojackpotComponent from '../components/EurojackpotComponent.astro';
 
 <script>
   import { i18n } from '../i18n/i18n';
-  import Chart from 'chart.js/auto';
-  import { EurojackpotComponent } from '../components/eurojackpot';
   
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing i18n...');
-    
-    // Initialize i18n first
+    // Initialize i18n
     i18n.init();
-    
-    // Then initialize the EuroJackpot component
-    try {
-      new EurojackpotComponent('eurojackpot-container');
-      console.log('EuroJackpot component initialized');
-    } catch (error) {
-      console.error('Failed to initialize EuroJackpot component:', error);
-    }
   });
 </script>

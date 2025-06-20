@@ -26,10 +26,17 @@ const translations = {
   euroNumbersSum: "Summe der Eurozahlen",
   number: "Zahl",
   copiedSuccess: "JSON-Daten in die Zwischenablage kopiert!",
-  copyError: "Kopieren in die Zwischenablage fehlgeschlagen. Bitte versuchen Sie es erneut."
+  copyError: "Kopieren in die Zwischenablage fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  pairAnalysis: "Paar-Analyse",
+  mostCommonPairs: "Häufigste Paare",
+  mostCommonTriplets: "Häufigste Drillinge",
+  mostCommonEuroPairs: "Häufigste Euro-Paare",
+  pair: "Paar",
+  triplet: "Drilling",
+  occurrences: "Vorkommen"
 };
 ---
 
-<Layout title="EuroJackpot Historie - Wie man schnell Geld verliert" description="Sehen Sie die komplette Historie der EuroJackpot-Ziehungen und laden Sie die Daten als JSON herunter." lang="de">
+<Layout title={`EuroJackpot Historische Daten & Statistiken | Komplette Ziehungshistorie 2012-${new Date().getFullYear()}`} description={`Zugriff auf vollständige EuroJackpot-Daten von 2012-${new Date().getFullYear()}. Ziehungsstatistiken, Zahlenhäufigkeiten, heiße/kalte Zahlen und JSON-Download für Analysen.`} lang="de">
   <HistoryPageComponent lang="de" translations={translations} />
 </Layout>

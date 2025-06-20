@@ -26,10 +26,16 @@ const translations = {
   euroNumbersSum: "Euro Numbers Sum",
   number: "Number",
   copiedSuccess: "JSON data copied to clipboard!",
-  copyError: "Failed to copy to clipboard. Please try again."
+  copyError: "Failed to copy to clipboard. Please try again.",
+  pairAnalysis: "Pair Analysis",
+  mostCommonPairs: "Most Common Pairs",
+  mostCommonTriplets: "Most Common Triplets",
+  pair: "Pair",
+  triplet: "Triplet",
+  occurrences: "Occurrences"
 };
 ---
 
-<Layout title="EuroJackpot History - How To Lose Money Fast" description="View the complete history of EuroJackpot draws and download the data as JSON.">
+<Layout title={`EuroJackpot Historical Data & Statistics | Complete Draw History 2012-${new Date().getFullYear()}`} description={`Access complete EuroJackpot historical data from 2012-${new Date().getFullYear()}. View draw statistics, number frequencies, hot/cold numbers, and download JSON data for analysis.`}>
   <HistoryPageComponent lang="en" translations={translations} />
 </Layout>

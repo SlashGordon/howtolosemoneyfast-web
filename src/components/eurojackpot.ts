@@ -22,12 +22,12 @@ export class EurojackpotComponent {
     
     this.render();
     
-    // Update translations after rendering
-    this.updateTranslations();
-    
     // Create containers for saved numbers and results
     this.savedNumbersContainer = document.getElementById('saved-numbers') as HTMLElement;
     this.resultsContainer = document.getElementById('results-container') as HTMLElement;
+    
+    // Update translations after containers are set
+    this.updateTranslations();
     
     this.bindEvents();
     this.loadSavedNumbers();
@@ -381,6 +381,7 @@ export class EurojackpotComponent {
   
   private loadSavedNumbers(): void {
     const savedNumbers = getNumbersFromCookie();
+    if (!this.savedNumbersContainer) return;
     const listContainer = this.savedNumbersContainer.querySelector('.saved-numbers-list') as HTMLElement;
     
     if (savedNumbers.length === 0) {

@@ -74,11 +74,11 @@ export const translations: Translations = {
       acceptAll: "Accept all",
       acceptAllText: "By clicking \"Accept all\", you consent to the use of ALL cookies and trackers.",
       necessaryText: "By clicking \"Necessary only\", only technically required cookies will be used.",
-      moreInfo: "You can find more information in our Privacy Policy."
+      moreInfo: "You can find more information in our"
     },
     footer: {
       tutorial: "Tutorial",
-      history: "History",
+      history: "Stats & History",
       impressum: "Impressum",
       privacy: "Privacy Policy"
     },
@@ -151,11 +151,11 @@ export const translations: Translations = {
       acceptAll: "Alle akzeptieren",
       acceptAllText: "Durch Klicken auf \"Alle akzeptieren\" stimmen Sie der Verwendung ALLER Cookies und Tracker zu.",
       necessaryText: "Durch Klicken auf \"Nur notwendige\" werden nur technisch erforderliche Cookies verwendet.",
-      moreInfo: "Weitere Informationen finden Sie in unserer Datenschutzerklärung."
+      moreInfo: "Weitere Informationen finden Sie in unserer"
     },
     footer: {
       tutorial: "Anleitung",
-      history: "Historie",
+      history: "Statistiken & Historie",
       impressum: "Impressum",
       privacy: "Datenschutzerklärung"
     },
@@ -228,11 +228,11 @@ export const translations: Translations = {
       acceptAll: "Aceptar todas",
       acceptAllText: "Al hacer clic en \"Aceptar todas\", usted consiente el uso de TODAS las cookies y rastreadores.",
       necessaryText: "Al hacer clic en \"Solo necesarias\", solo se utilizarán las cookies técnicamente necesarias.",
-      moreInfo: "Puede encontrar más información en nuestra Política de Privacidad."
+      moreInfo: "Puede encontrar más información en nuestra"
     },
     footer: {
       tutorial: "Tutorial",
-      history: "Historial",
+      history: "Estadísticas e Historial",
       impressum: "Aviso Legal",
       privacy: "Política de Privacidad"
     },

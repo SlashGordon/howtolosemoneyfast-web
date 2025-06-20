@@ -22,6 +22,9 @@ export class EurojackpotComponent {
     
     this.render();
     
+    // Update translations after rendering
+    this.updateTranslations();
+    
     // Create containers for saved numbers and results
     this.savedNumbersContainer = document.getElementById('saved-numbers') as HTMLElement;
     this.resultsContainer = document.getElementById('results-container') as HTMLElement;
@@ -91,13 +94,13 @@ export class EurojackpotComponent {
             
             <div class="flex flex-wrap gap-3">
               <button type="submit" class="inline-flex bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center">
-                <span data-i18n="eurojackpot.saveCheck">Save & Check Numbers</span>
+                <span data-i18n="eurojackpot.saveCheck"></span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </button>
               <button type="button" id="bulk-import" class="inline-flex bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center">
-                <span data-i18n="eurojackpot.bulkImport">Bulk Import</span>
+                <span data-i18n="eurojackpot.bulkImport"></span>
               </button>
             </div>
           </form>
